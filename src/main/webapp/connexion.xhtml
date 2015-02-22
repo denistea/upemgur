@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Connexion</title>
+    </h:head>
+    <h:body>
+        <h1>Connexion</h1>
+        <h:form>
+            <h:panelGroup rendered="#{not AuthenticateBean.isLogin()}">
+                UserName <h:inputText value="#{AuthenticateBean.user.userName}"/><br/>
+                Password <h:inputSecret value="#{AuthenticateBean.user.password}"/><br/>
+                <h:commandButton value="Sign in" action="#{AuthenticateBean.login}"/>
+            </h:panelGroup>
+            <h:commandButton value="Sign out" action="#{AuthenticateBean.logout}" rendered="#{AuthenticateBean.isLogin()}"/>
+        </h:form>
+    </h:body>
+</html>
+
