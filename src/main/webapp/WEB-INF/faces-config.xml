@@ -8,6 +8,12 @@
         <navigation-case>
             <from-outcome>index</from-outcome>
             <to-view-id>/restricted/test.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>faces-redirect</name>
+                    <value>true</value>
+                </view-param>
+            </redirect>
         </navigation-case>
     </navigation-rule>
 </faces-config>
