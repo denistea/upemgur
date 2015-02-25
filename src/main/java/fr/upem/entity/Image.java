@@ -7,6 +7,7 @@ package fr.upem.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,17 +15,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Denis
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i"),
+    @NamedQuery(name = "Image.findByUser", query = "SELECT i FROM Image i WHERE i.users = :users")
+})
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
+    @Column(unique=true, nullable = false)
     private String path;
     private String title;
     private String descriptioin;
@@ -88,15 +98,15 @@ public class Image implements Serializable {
         return dimX;
     }
 
-    public void setDimX(Long dimX) {
+    public void setDimX(long dimX) {
         this.dimX = dimX;
     }
 
-    public Long getDimY() {
+    public long getDimY() {
         return dimY;
     }
 
-    public void setDimY(Long dimY) {
+    public void setDimY(long dimY) {
         this.dimY = dimY;
     }
 
@@ -104,16 +114,16 @@ public class Image implements Serializable {
         return nbView;
     }
 
-    public void setNbView(Long nbView) {
+    public void setNbView(long nbView) {
         this.nbView = nbView;
     }
 
     
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -124,5 +134,26 @@ public class Image implements Serializable {
     public void setUsers(Users users) {
         this.users = users;
     }
- 
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Image other = (Image) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

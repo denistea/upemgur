@@ -5,9 +5,10 @@
  */
 package fr.upem.controller;
 
-import fr.upem.dao.UserDAO;
+import fr.upem.dao.ImageDAO;
+import fr.upem.entity.Image;
 import fr.upem.entity.Users;
-import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -16,25 +17,19 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("joinBean")
+@Named("imageController")
 @RequestScoped
-public class JoinBean implements Serializable{
+public class ImageController {
     
     @EJB
-    private UserDAO dao;
-    private Users user;
+    private ImageDAO imageDAO;
     
-    public JoinBean() {
-        user = new Users();
-    }
-
-    public Users getUser() {
-       return user;
+    public List<Image> getImagesByUser(Users user) {
+        return imageDAO.findByUser(user);
     }
     
-    public String join() {
-        dao.create(user);
-        
-        return "connexion";
+    public void removeImages(Image image) {
+        imageDAO.delete(image);
     }
+    
 }

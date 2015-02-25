@@ -6,11 +6,12 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <h:form enctype="multipart/form-data">
-            InputFile <h:inputFile value="#{uploadImageBean.part}"/><br/>
-            <h:commandButton action="#{uploadImageBean.uploadFile()}" value="upload file" /><br/>
-        </h:form>
+        <h1>Profile</h1>
+        UserName <h:outputText value="#{sessionScope.userSession.userName}"/><br/>
+        Email <h:outputText value="#{sessionScope.userSession.email}"/><br/>
+        
+        <h1>Image</h1>
+        <h1>Comment</h1>
     </h:body>
 </html>
 

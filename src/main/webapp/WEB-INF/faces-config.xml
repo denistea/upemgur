@@ -16,4 +16,17 @@
             </redirect>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/inscription.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>connexion</from-outcome>
+            <to-view-id>/connexion.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>faces-redirect</name>
+                    <value>true</value>
+                </view-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

@@ -6,14 +6,15 @@
         <title>Connexion</title>
     </h:head>
     <h:body>
+        <a href="inscription.xhtml">Inscription</a>
         <h1>Connexion</h1>
         <h:form>
-            <h:panelGroup rendered="#{not AuthenticateBean.isLogin()}">
-                UserName <h:inputText value="#{AuthenticateBean.user.userName}"/><br/>
-                Password <h:inputSecret value="#{AuthenticateBean.user.password}"/><br/>
-                <h:commandButton value="Sign in" action="#{AuthenticateBean.login}"/>
+            <h:panelGroup rendered="#{not authenticateBean.isLogin()}">
+                UserName <h:inputText value="#{authenticateBean.user.userName}"/><br/>
+                Password <h:inputSecret value="#{authenticateBean.user.password}"/><br/>
+                <h:commandButton value="Sign in" action="#{authenticateBean.login}"/>
             </h:panelGroup>
-            <h:commandButton value="Sign out" action="#{AuthenticateBean.logout}" rendered="#{AuthenticateBean.isLogin()}"/>
+            <h:commandButton value="Sign out" action="#{authenticateBean.logout}" rendered="#{authenticateBean.isLogin()}"/>
         </h:form>
     </h:body>
 </html>

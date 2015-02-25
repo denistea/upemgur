@@ -17,7 +17,7 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("AuthenticateBean")
+@Named("authenticateBean")
 @RequestScoped
 public class AuthenticateBean implements Serializable{
    
@@ -27,7 +27,7 @@ public class AuthenticateBean implements Serializable{
     private Users user;
     
     @EJB
-    private UserDAO dao;
+    private UserDAO userDAO;
     
     public AuthenticateBean() {
         user = new Users();
@@ -44,7 +44,8 @@ public class AuthenticateBean implements Serializable{
     
     public String login() {
         //Find User in Database
-        Users userDB = new Users("test", "test", "");
+        Users userDB = userDAO.findByUserName(user.getUserName());
+        
         
         //Test if userName exist
         if(userDB == null) {
@@ -57,7 +58,7 @@ public class AuthenticateBean implements Serializable{
         }
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-                .put(AUTH_KEY, user);
+                .put(AUTH_KEY, userDB);
         return "index";
     }
     
