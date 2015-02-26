@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i"),
-    @NamedQuery(name = "Image.findByUser", query = "SELECT i FROM Image i WHERE i.users = :users")
+    @NamedQuery(name = "Image.findByUsers", query = "SELECT i FROM Image i WHERE i.users = :users")
 })
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;

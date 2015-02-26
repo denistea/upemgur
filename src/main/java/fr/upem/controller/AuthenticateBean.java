@@ -20,9 +20,6 @@ import javax.inject.Named;
 @Named("authenticateBean")
 @RequestScoped
 public class AuthenticateBean implements Serializable{
-   
-
-    private final static String AUTH_KEY = "userSession";
     
     private Users user;
     
@@ -39,7 +36,7 @@ public class AuthenticateBean implements Serializable{
     
     public boolean isLogin() {
        return FacesContext.getCurrentInstance().getExternalContext()
-               .getSessionMap().get(AUTH_KEY) != null;
+               .getSessionMap().get("userSession") != null;
     }
     
     public String login() {
@@ -58,13 +55,13 @@ public class AuthenticateBean implements Serializable{
         }
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-                .put(AUTH_KEY, userDB);
+                .put("userSession", userDB);
         return "index";
     }
     
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-                .remove(AUTH_KEY);
+                .remove("userSession");
         return null;
     }
 }

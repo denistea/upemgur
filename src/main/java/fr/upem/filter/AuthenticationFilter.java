@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Denis
  */
 public class AuthenticationFilter implements Filter {
-    private final static String AUTH_KEY = "userSession";
     
     private FilterConfig filterConfig = null;
     
@@ -41,7 +40,7 @@ public class AuthenticationFilter implements Filter {
         
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        if(httpRequest.getSession().getAttribute(AUTH_KEY) == null) {
+        if(httpRequest.getSession().getAttribute("userSession") == null) {
             httpResponse.sendRedirect("../connexion.xhtml");
         }
         else {

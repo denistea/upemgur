@@ -8,6 +8,7 @@ package fr.upem.dao;
 import fr.upem.entity.Image;
 import fr.upem.entity.Users;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
@@ -15,13 +16,14 @@ import javax.persistence.EntityManager;
  *
  * @author Denis
  */
+@Stateless
 public class ImageDAO extends DAO<Image>{
     
     @Inject
     private EntityManager em;
 
-    public ImageDAO(Class<Image> entityClass) {
-        super(entityClass);
+    public ImageDAO() {
+        super(Image.class);
     }
 
     @Override
@@ -29,7 +31,7 @@ public class ImageDAO extends DAO<Image>{
         return em;
     }
     
-    public List<Image> findByUser(Users users) {
+    public List<Image> findByUsers(Users users) {
         return em.createNamedQuery("Image.findByUsers", Image.class) 
                   .setParameter("users", users) 
                   .getResultList();

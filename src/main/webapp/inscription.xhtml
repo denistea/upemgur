@@ -9,10 +9,18 @@
     </h:head>
     <h:body>
         <h:form>
-            UserName <h:inputText value="#{joinBean.user.userName}"/><br/>
-            Email Address <h:inputText value="#{joinBean.user.email}"/><br/>
-            Password <h:inputSecret value="#{joinBean.user.password}"/><br/>
-            Confirm your password <h:inputSecret value="#{joinBean.user.password}"/><br/>
+            UserName 
+            <h:inputText value="#{joinBean.user.userName}" required="true" label="userName">
+                <f:validateRegex pattern="\w*" />
+            </h:inputText><br/>
+            Email Address 
+            <h:inputText value="#{joinBean.user.email}" required="true" label="email">
+                <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+            </h:inputText><br/>
+            Password <h:inputSecret value="#{joinBean.user.password}" required="true" label="password"/><br/>
+            Confirm your password 
+            <h:inputSecret value="#{joinBean.user.password}" required="true">
+            </h:inputSecret><br/>
             <h:commandButton value="submit" action="#{joinBean.join}"/>
         </h:form>
     </h:body>

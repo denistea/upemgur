@@ -5,12 +5,11 @@
  */
 package fr.upem.controller;
 
-import fr.upem.dao.ImageDAO;
+import fr.upem.dao.CommentDAO;
+import fr.upem.entity.Comment;
 import fr.upem.entity.Image;
 import fr.upem.entity.Users;
-import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -19,21 +18,17 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("imageController")
+@Named("commentController")
 @RequestScoped
-public class ImageController implements Serializable {
-    
+public class CommentController {
     @EJB
-    private ImageDAO imageDAO;
+    private CommentDAO commentDAO;
     
-    public List<Image> getImagesByUser(Users user) {
-        Objects.requireNonNull(user);
-        
-        return imageDAO.findByUsers(user);
+    public List<Comment> getCommentsByUser(Users users) {
+        return commentDAO.findByUsers(users);
     }
     
-    public void removeImages(Image image) {
-        imageDAO.delete(image);
+    public List<Comment> getCommentsByImage(Image image) {
+        return commentDAO.findByImage(image);
     }
-    
 }

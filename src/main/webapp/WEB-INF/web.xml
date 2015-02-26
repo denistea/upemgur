@@ -15,7 +15,7 @@
     </session-config>
     
     <welcome-file-list>
-        <welcome-file>connexion.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     
     <filter>

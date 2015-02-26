@@ -14,12 +14,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Denis
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
+    @NamedQuery(name = "Comment.findByUsers", query = "SELECT c FROM Comment c WHERE c.users = :users"),
+    @NamedQuery(name = "Comment.findByImage", query = "SELECT c FROM Comment c WHERE c.image = :image"),      
+})
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
