@@ -59,7 +59,7 @@ public class UploadImageBean {
         System.out.println(part.getContentType());
         
         //Upload the file
-        Path basePath = Paths.get("C:/Users/Denis/Desktop/TW/");
+        Path basePath = Paths.get("C:/var/webapp/images");
         File file = basePath.resolve(part.getSubmittedFileName()).toFile();
         try(InputStream is = part.getInputStream(); OutputStream os = new FileOutputStream(file)) {
             int read = 0;
