@@ -8,12 +8,12 @@
     <h:body>
         <h1>Connexion</h1>
         <h:form>
-            <h:panelGroup rendered="#{not authenticateBean.isLogin()}">
-                UserName <h:inputText value="#{authenticateBean.user.userName}"/><br/>
-                Password <h:inputSecret value="#{authenticateBean.user.password}"/><br/>
-                <h:commandButton value="Sign in" action="#{authenticateBean.login}"/>
+            <h:panelGroup rendered="#{not authenticateBean.isSignedIn()}">
+                UserName <h:inputText value="#{authenticateBean.login}"/><br/>
+                Password <h:inputSecret value="#{authenticateBean.password}"/><br/>
+                <h:commandButton value="Sign in" action="#{authenticateBean.signIn()}"/>
             </h:panelGroup>
-            <h:commandButton value="Sign out" action="#{authenticateBean.logout}" rendered="#{authenticateBean.isLogin()}"/>
+            <h:commandButton value="Sign out" action="#{authenticateBean.signOut()}" rendered="#{authenticateBean.isSignedIn()}"/>
         </h:form>
     </h:body>
 </html>

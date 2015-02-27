@@ -9,19 +9,40 @@
     </h:head>
     <h:body>
         <h:form>
-            UserName 
-            <h:inputText value="#{joinBean.user.userName}" required="true" label="userName">
-                <f:validateRegex pattern="\w*" />
+            <h:outputLabel for="userName" value="UserName " />
+            <h:inputText id="userName" value="#{joinBean.user.userName}" required="true" >
+                <f:validateRegex pattern="[^\W\d_]\w*" />
+                <f:validateLength minimum="3"/>
+                <f:validator validatorId="uniqueUserNameValidator" />
+                <f:ajax event="blur" render="@this" />
             </h:inputText><br/>
-            Email Address 
-            <h:inputText value="#{joinBean.user.email}" required="true" label="email">
+            
+            
+            <h:outputLabel for="email" value="Email Address " />
+            <h:inputText id="email" value="#{joinBean.user.email}" required="true" label="email">
                 <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                <f:validator validatorId="uniqueEmailValidator" />
+                <f:ajax event="blur" render="m_email" />
             </h:inputText><br/>
-            Password <h:inputSecret value="#{joinBean.user.password}" required="true" label="password"/><br/>
-            Confirm your password 
-            <h:inputSecret value="#{joinBean.user.password}" required="true">
+            
+            
+            <h:outputLabel for="password" value="Password " />
+            <h:inputSecret id="password" value="#{joinBean.user.password}" required="true" label="password">
+                <f:validateLength minimum="4"/>
+                <f:validator validatorId="confirmPasswordValidator" />
+                <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+                <f:ajax event="blur" execute="password confirm" render="m_password" />
             </h:inputSecret><br/>
-            <h:commandButton value="submit" action="#{joinBean.join}"/>
+            
+            <h:outputLabel for="confirm" value="Confirm your password  " />
+            <h:inputSecret id="confirm" binding="#{confirmPassword}" required="true">
+                <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
+            </h:inputSecret><br/>
+            
+            <h:commandButton value="submit" action="#{joinBean.join}">
+                <f:ajax execute="@form" render="@all" />
+            </h:commandButton><br/>
+
         </h:form>
     </h:body>
 </html>

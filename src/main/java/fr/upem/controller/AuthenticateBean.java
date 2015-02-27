@@ -21,36 +21,36 @@ import javax.inject.Named;
 @RequestScoped
 public class AuthenticateBean implements Serializable{
     
-    private Users user;
+    private String login;
+    private String password;
     
     @EJB
     private UserDAO userDAO;
     
     public AuthenticateBean() {
-        user = new Users();
     }
     
-    public Users getUser() {
-        return user;
-    }
-    
-    public boolean isLogin() {
+    public boolean isSignedIn() {
        return FacesContext.getCurrentInstance().getExternalContext()
                .getSessionMap().get("userSession") != null;
     }
     
-    public String login() {
+    public String signIn() {
         //Find User in Database
-        Users userDB = userDAO.findByUserName(user.getUserName());
+        Users userDB = userDAO.findByUserName(login);
         
         
         //Test if userName exist
         if(userDB == null) {
-            return null;
+            userDB = userDAO.findByEmail(login);
+            
+            if(userDB == null) {
+                return null;
+            }
         }
 
         //Compare the password
-        if(!user.getPassword().equals(userDB.getPassword())) {
+        if(!password.equals(userDB.getPassword())) {
             return null;
         }
         
@@ -59,9 +59,27 @@ public class AuthenticateBean implements Serializable{
         return "index";
     }
     
-    public String logout() {
+    public String signOut() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .remove("userSession");
         return null;
     }
+    
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    
 }

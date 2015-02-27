@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -32,13 +34,20 @@ public class Users implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
+    
+    @NotNull(message = "Email is required" )
+    @Pattern(regexp="[\\w\\.-]*[a-zA-Z0-9_]@[\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]")
     @Column(unique=true, nullable = false)
     private String email;
-    @NotNull
+    
+    @NotNull ( message = "UserName is required" )
+    @Size(min = 3)
+    @Pattern(regexp="[^\\W\\d_]\\w*")
     @Column(unique=true, nullable = false)
     private String userName;
-    @NotNull
+    
+    @NotNull ( message = "Password is required" )
+    @Size(min = 4)
     @Column(nullable = false)
     private String password;
 

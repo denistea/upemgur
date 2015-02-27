@@ -6,6 +6,7 @@
 package fr.upem.dao;
 
 import fr.upem.entity.Users;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -29,14 +30,26 @@ public class UserDAO extends DAO<Users> {
     }
     
     public Users findByUserName(String userName) {
-        return em.createNamedQuery("Users.findByUserName", Users.class) 
+        List<Users> users = em.createNamedQuery("Users.findByUserName", Users.class) 
                   .setParameter("userName", userName) 
-                  .getSingleResult();
+                  .getResultList();
+        
+        if(users.isEmpty()) {
+            return null;
+        }
+        
+        return users.get(0);
     }
     
     public Users findByEmail(String email) {
-        return em.createNamedQuery("Users.findByEmail", Users.class) 
+        List<Users> users = em.createNamedQuery("Users.findByEmail", Users.class) 
                   .setParameter("email", email) 
-                  .getSingleResult();
+                  .getResultList();
+        
+        if(users.isEmpty()) {
+            return null;
+        }
+        
+        return users.get(0);
     }
 }

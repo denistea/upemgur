@@ -5,7 +5,10 @@
  */
 package fr.upem.controller;
 
+import fr.upem.dao.ImageDAO;
 import fr.upem.entity.Image;
+import fr.upem.entity.Users;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,7 +19,11 @@ import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.imageio.ImageIO;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
@@ -28,6 +35,11 @@ import javax.servlet.http.Part;
 @RequestScoped
 public class UploadImageBean {
     
+    private final static String PATH = "C:/var/webapp/images";
+    
+    @EJB
+    private ImageDAO imageDAO;
+    
     private Part part;
     private Image image;
 
@@ -35,22 +47,34 @@ public class UploadImageBean {
         image = new Image();
     }
     
-    public String uploadFile(){
+    public String uploadFile(Users users){
+        System.out.println(part.getContentType());
+        if(!"image/jpeg".equals(part.getContentType())) {
+            return null;
+        }
+        
+        BufferedImage bf;
+        try {
+            bf = ImageIO.read(part.getInputStream());
+            
+            if(bf == null) {
+                return null;
+            }
+        } catch (IOException ex) {
+            return null;
+        }
+        
         //Metadata
-        image.setDimX(0);
-        image.setDimY(0);
+        image.setDimX(bf.getWidth());
+        image.setDimY(bf.getHeight());
         
         image.setNbView(0);
+        image.setUsers(users);
         
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
         image.setTime(new Timestamp(now.getTime()));
 
-        
-        image.setUsers(null);
-        
-        image.setPath(null);
-        
         /*try {
             BufferedImage bf = ImageIO.read(part.getInputStream());
         } catch (IOException ex) {
@@ -59,7 +83,8 @@ public class UploadImageBean {
         System.out.println(part.getContentType());
         
         //Upload the file
-        Path basePath = Paths.get("C:/var/webapp/images");
+        Path basePath = Paths.get(PATH);
+        image.setPath(basePath.resolve(part.getSubmittedFileName()).toString());
         File file = basePath.resolve(part.getSubmittedFileName()).toFile();
         try(InputStream is = part.getInputStream(); OutputStream os = new FileOutputStream(file)) {
             int read = 0;
@@ -70,7 +95,7 @@ public class UploadImageBean {
         } catch (IOException ex) {
             
         }
-        
+        imageDAO.create(image);
         return null;
     }
 
