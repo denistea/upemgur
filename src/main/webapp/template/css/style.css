@@ -1,0 +1,82 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+.black-text {
+	color: black;
+}
+
+#header {
+	height: 50px;
+	background-color: #00a1d7;
+	line-height: 50px;
+	padding-left: 30px;
+}
+
+#logo {
+	width: 50px;
+	height: 35px;
+	background-image: url("../images/logo-min.png");
+	display: inline-block;
+	margin-top: 6px;
+	float: left;
+}
+
+#logo-name {
+	font-family: "Typo Grotesk";
+	color: white;
+	font-size: 24px;
+	margin-left: 10px;
+	float: left;
+}
+
+#header-links a {
+	color: white;
+	font-family: "Open sans";
+	font-size: 16px;
+	float: right;
+	margin-right: 30px;
+}
+
+#content {
+	max-width: 1300px;
+	margin: 0 auto;
+	font-family: "Open sans light";
+	font-size: 28px;
+	padding: 0 30px 0 30px;
+}
+
+.site-width {
+	max-width: 1300px;
+	margin: 0 auto;
+}
+
+.home-title {
+	margin: 20px 0 20px 0;
+}
+
+.image-holder {
+	text-align: center;
+	background-color: #212124;
+	padding: 40px;
+	height: 550px;
+}
+
+.navbar-custom {
+	margin-bottom: 0;
+	background-color: #00a1d7;
+}
+
+.navbar-custom a {
+	color: white;
+}
+
+.submit-comment {
+	text-align: right;
+	margin-top: 10px;
+}
