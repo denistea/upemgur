@@ -1,4 +1,95 @@
-body {
+/* Personnalisation de la navbar */
+.navbar-default {
+    background-color: #00a1d7;
+    border-width: 0px;
+    border-radius: 0px;
+    font-family: "Open sans";
+    font-size: 16px;
+    margin-bottom: 0;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #f0f0f0;
+}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+    color: #f0f0f0;
+    background-color: #207eae;
+}
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    color: #f0f0f0;
+    background-color: #207eae;
+}
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:focus,
+.navbar-default .navbar-nav>.open>a:hover {
+    color: #f0f0f0;
+    background-color: #207eae;
+}
+.navbar-default .navbar-toggle {
+    border-color: #207eae;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #207eae;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #207eae;
+}
+.navbar-default .navbar-toggle:hover .icon-bar,
+.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #00a1d7;
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+	color: #333;;
+}
+
+
+
+.brand-logo {
+	padding: 8px;
+}
+
+.black-text {
+	color: black;
+}
+
+#logo-name {
+	font-family: "Typo Grotesk";
+	color: white;
+	font-size: 24px;
+}
+
+.image-holder {
+	text-align: center;
+	background-color: #212124;
+	padding: 40px;
+	height: 550px;
+}
+.submit-comment {
+	text-align: right;
+	margin-top: 10px;
+}
+
+
+.sidebar {
+	background-color: #f5f5f5;
+	border-radius: 4px;
+	margin-top: 20px;
+	padding-bottom: 10px;
+}
+
+.content-right {
+	margin-top: 20px;
+}
+
+.nav-separator {
+	background-color: #e5e5e5;
+	height: 2px;
+	border-bottom: 1px solid white;
+}
+/*body {
 	margin: 0;
 	padding: 0;
 }
@@ -67,16 +158,16 @@ a {
 	height: 550px;
 }
 
-.navbar-custom {
+.navbar-default {
 	margin-bottom: 0;
 	background-color: #00a1d7;
 }
 
-.navbar-custom a {
+.navbar-default a {
 	color: white;
 }
 
 .submit-comment {
 	text-align: right;
 	margin-top: 10px;
-}
+}*/
