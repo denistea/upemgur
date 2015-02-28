@@ -31,7 +31,8 @@ public abstract class DAO<T> {
     }
     
     public void delete(T t) {
-        getEntityManager().remove(t);
+        //getEntityManager().remove(t);
+        getEntityManager().remove(getEntityManager().contains(t) ? t : getEntityManager().merge(t));
     }
     
     public T find(Object primaryKey) {

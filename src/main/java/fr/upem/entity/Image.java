@@ -8,6 +8,8 @@ package fr.upem.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i"),
-    @NamedQuery(name = "Image.findByUsers", query = "SELECT i FROM Image i WHERE i.users = :users")
+    @NamedQuery(name = "Image.findByUsers", query = "SELECT i FROM Image i WHERE i.users = :users"),
+    @NamedQuery(name = "Image.findByTitle", query = "SELECT i FROM Image i WHERE i.title LIKE :title")
 })
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -35,6 +38,7 @@ public class Image implements Serializable {
     private Long id;
     @NotNull
     @Column(unique=true, nullable = false)
+    private String filename;
     private String path;
     private String title;
     private String descriptioin;
@@ -51,23 +55,24 @@ public class Image implements Serializable {
     public Image() {
     }
 
-    public Image(Long id, String path, String title, String descriptioin, Timestamp time, Long dimX, Long dimY, Long nbView) {
+    public Image(Long id, String filename, String path, String title, String descriptioin, Timestamp time, Long dimX, Long dimY, Long nbView) {
         this.id = id;
-        this.path = path;
+        this.filename = filename;
         this.title = title;
         this.descriptioin = descriptioin;
         this.time = time;
         this.dimX = dimX;
         this.dimY = dimY;
         this.nbView = nbView;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public String getTitle() {
@@ -94,7 +99,7 @@ public class Image implements Serializable {
         this.time = time;
     }
 
-    public Long getDimX() {
+    public long getDimX() {
         return dimX;
     }
 
@@ -134,6 +139,15 @@ public class Image implements Serializable {
     public void setUsers(Users users) {
         this.users = users;
     }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+    
 
     @Override
     public int hashCode() {

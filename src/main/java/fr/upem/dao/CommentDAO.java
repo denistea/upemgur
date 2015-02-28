@@ -40,7 +40,7 @@ public class CommentDAO extends DAO<Comment>{
    
     public List<Comment> findByImage(Image image) {
         return em.createNamedQuery("Comment.findByImage", Comment.class) 
-                  .setParameter("image", image) 
+                  .setParameter("image", image)
                   .getResultList();
     }
     

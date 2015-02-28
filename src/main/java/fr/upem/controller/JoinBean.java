@@ -21,7 +21,7 @@ import javax.inject.Named;
 public class JoinBean implements Serializable{
     
     @EJB
-    private UserDAO dao;
+    private UserDAO userDAO;
     private Users user;
     
     public JoinBean() {
@@ -33,7 +33,7 @@ public class JoinBean implements Serializable{
     }
     
     public String join() {
-        dao.create(user);
+        userDAO.create(user);
         
         return "connexion";
     }

@@ -10,19 +10,19 @@ import fr.upem.entity.Image;
 import fr.upem.entity.Users;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.validator.ValidatorException;
 import javax.imageio.ImageIO;
 import javax.inject.Named;
 import javax.servlet.http.Part;
@@ -84,16 +84,16 @@ public class UploadImageBean {
         
         //Upload the file
         Path basePath = Paths.get(PATH);
-        image.setPath(basePath.resolve(part.getSubmittedFileName()).toString());
+        image.setFilename(part.getSubmittedFileName());
         File file = basePath.resolve(part.getSubmittedFileName()).toFile();
-        try(InputStream is = part.getInputStream(); OutputStream os = new FileOutputStream(file)) {
-            int read = 0;
-            final byte[] bytes = new byte[1024];
-            while ((read = is.read(bytes)) != -1) {
-                os.write(bytes, 0, read);
-            }
+        
+        try (InputStream is = part.getInputStream()){
+            Path filepath = Files.createTempFile(basePath,"",".jpg");
+            image.setFilename(filepath.getFileName().toString());
+            image.setPath(filepath.toString());
+            Files.copy(is, filepath,REPLACE_EXISTING);
         } catch (IOException ex) {
-            
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.toString(), null));
         }
         imageDAO.create(image);
         return null;

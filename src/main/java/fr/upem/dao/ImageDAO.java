@@ -37,4 +37,10 @@ public class ImageDAO extends DAO<Image>{
                   .getResultList();
     }
     
+    public List<Image> findByTitle(String title) {
+        return em.createNamedQuery("Image.findByTitle", Image.class)
+                 .setParameter("title", "%"+title+"%")
+                 .getResultList();
+    }
+    
 }

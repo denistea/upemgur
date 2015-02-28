@@ -6,10 +6,15 @@
 package fr.upem.dao;
 
 import fr.upem.entity.Users;
+import fr.upem.entity.Users_;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -51,5 +56,24 @@ public class UserDAO extends DAO<Users> {
         }
         
         return users.get(0);
+    }
+    
+    public List<Users> findAllSortedBy(int maxResult, String...attrs) {
+        em.createQuery("SELECT u FROM Users u ORDER BY ");
+        
+        
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Users> query = builder.createQuery(Users.class);
+        Root<Users> users = query.from(Users.class);
+        query.select(users);
+        
+        //Users_.email
+        for(String attr : attrs) {
+            Order order = builder.desc(users.get(attr));
+            query.getOrderList().add(order);
+        }
+        
+        return em.createQuery(query).setMaxResults(maxResult).getResultList();
+        //sm=em.createQuery("select m from MasterScrip m where m.type = :type order by m.totalTradedVolume").setParameter("type", type).setMaxResults(2).getResultList()
     }
 }

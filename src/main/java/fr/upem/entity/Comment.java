@@ -8,6 +8,8 @@ package fr.upem.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,11 +37,11 @@ public class Comment implements Serializable {
     private String content;
     private Timestamp time;
     
-    @ManyToOne
+    @ManyToOne(cascade = REMOVE)
     @JoinColumn(name="users_id")
     private Users users;
     
-    @ManyToOne
+    @ManyToOne(cascade = REMOVE)
     @JoinColumn(name="image_id")
     private Image image;
     
