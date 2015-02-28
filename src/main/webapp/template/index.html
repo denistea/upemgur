@@ -35,7 +35,6 @@
           <a class="navbar-brand brand-logo">
             <img alt="upemgur" src="images/logo.png">
           </a>
-          <a id="logo-name" class="navbar-brand" href="#"><span class="black-text">upem</span>gur</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,59 +43,6 @@
             <li><a href="#" data-toggle="modal" data-target="#connexionModal">Connexion</a></li>
             <li><a href="#" data-toggle="modal" data-target="#inscriptionModal">Inscription</a></li>
             <!-- Button trigger modal -->
-
-            <!-- Modal -->
-            <div class="modal fade" id="connexionModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
-              <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                  <form action="index-connecte.html" method="post">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="connexionTitle">Connexion</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="form-group">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail">
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPassword">Mot de passe</label>
-                        <input type="password" class="form-control" id="inputPassword">
-                      </div>
-                      <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-            <div class="modal fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionTitle" aria-hidden="true">
-              <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="inscriptionTitle">Inscription</h4>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="form-group">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail">
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPassword">Mot de passe</label>
-                          <input type="password" class="form-control" id="inputPassword">
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPassword">Confirmer mot de passe</label>
-                        <input type="password" class="form-control" id="inputPassword">
-                      </div>
-                      <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
 
 
             <li class="dropdown hidden">
@@ -111,7 +57,62 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="connexionModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <form action="index-connecte.html" method="post">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="connexionTitle">Connexion</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" id="inputEmail">
+              </div>
+              <div class="form-group">
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" class="form-control" id="inputPassword">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="inscriptionTitle">Inscription</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" id="inputEmail">
+              </div>
+              <div class="form-group">
+                <label for="inputPassword">Mot de passe</label>
+                  <input type="password" class="form-control" id="inputPassword">
+              </div>
+              <div class="form-group">
+                <label for="inputPassword">Confirmer mot de passe</label>
+                <input type="password" class="form-control" id="inputPassword">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container content">
       <div class="page-header">
         <h1>Dernières images</h1>
       </div>

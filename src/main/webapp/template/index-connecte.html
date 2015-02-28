@@ -35,7 +35,6 @@
           <a class="navbar-brand brand-logo">
             <img alt="upemgur" src="images/logo.png">
           </a>
-          <a id="logo-name" class="navbar-brand" href="#"><span class="black-text">upem</span>gur</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,7 +43,7 @@
             <li><a href="#">Uploader une image</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><button type="button" class="btn btn-primary navbar-btn">Upload image</button></li>
+            <li><button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#uploadModal">Upload image</button></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Miguel <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -54,11 +53,41 @@
                 <li><a href="#">Se deconnecter</a></li>
               </ul>
             </li>
+
+
           </ul>
         </div>
       </div>
     </nav>
-    <div class="container">
+
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="connexionTitle">Uploder une image</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <input type="file" id="inputImage">
+              </div>
+              <div class="form-group">
+                <label for="inputTitle">Titre</label>
+                <input type="text" class="form-control" id="inputTitle">
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">Description</label>
+                <textarea class="form-control" rows="3" id="inputDescription"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container content">
       <div class="page-header">
         <h1>Dernières images</h1>
       </div>
