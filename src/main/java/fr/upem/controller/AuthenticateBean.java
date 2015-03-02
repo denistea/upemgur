@@ -56,13 +56,13 @@ public class AuthenticateBean implements Serializable{
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .put("userSession", userDB);
-        return "index";
+        return null;
     }
     
     public String signOut() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .remove("userSession");
-        return null;
+        return "#";
     }
     
     public String getLogin() {

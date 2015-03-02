@@ -7,11 +7,15 @@ package fr.upem.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -48,9 +53,12 @@ public class Image implements Serializable {
     @Column(name = "nb_view")
     private Long nbView;
     
-    @ManyToOne
-    @JoinColumn(name="users_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="users_id", nullable = false)
     private Users users;
+    
+    @OneToMany(mappedBy="image", fetch = FetchType.LAZY)
+    private List<Comment> comments;
     
     public Image() {
     }
@@ -67,12 +75,28 @@ public class Image implements Serializable {
         this.path = path;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getFilename() {
         return filename;
     }
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getTitle() {
@@ -99,19 +123,19 @@ public class Image implements Serializable {
         this.time = time;
     }
 
-    public long getDimX() {
+    public Long getDimX() {
         return dimX;
     }
 
-    public void setDimX(long dimX) {
+    public void setDimX(Long dimX) {
         this.dimX = dimX;
     }
 
-    public long getDimY() {
+    public Long getDimY() {
         return dimY;
     }
 
-    public void setDimY(long dimY) {
+    public void setDimY(Long dimY) {
         this.dimY = dimY;
     }
 
@@ -119,17 +143,8 @@ public class Image implements Serializable {
         return nbView;
     }
 
-    public void setNbView(long nbView) {
+    public void setNbView(Long nbView) {
         this.nbView = nbView;
-    }
-
-    
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Users getUsers() {
@@ -140,15 +155,14 @@ public class Image implements Serializable {
         this.users = users;
     }
 
-    public String getPath() {
-        return path;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
     
-
     @Override
     public int hashCode() {
         int hash = 5;

@@ -8,12 +8,7 @@
         <navigation-case>
             <from-outcome>index</from-outcome>
             <to-view-id>/restricted/test.xhtml</to-view-id>
-            <redirect>
-                <view-param>
-                    <name>faces-redirect</name>
-                    <value>true</value>
-                </view-param>
-            </redirect>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -29,6 +24,12 @@
         <navigation-case>
             <from-outcome>image</from-outcome>
             <to-view-id>/image.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>includeViewParams</name>
+                    <value>true</value>
+                </view-param>
+            </redirect>
         </navigation-case>
     </navigation-rule>
 </faces-config>

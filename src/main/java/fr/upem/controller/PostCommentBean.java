@@ -6,6 +6,7 @@
 package fr.upem.controller;
 
 import fr.upem.dao.CommentDAO;
+import fr.upem.dao.ImageDAO;
 import fr.upem.entity.Comment;
 import fr.upem.entity.Image;
 import fr.upem.entity.Users;
@@ -26,6 +27,9 @@ public class PostCommentBean {
     @EJB
     private CommentDAO commentDAO;
     
+    @EJB
+    private ImageDAO imageDAO;
+    
     private Comment comment;
     
     public PostCommentBean() {
@@ -34,6 +38,7 @@ public class PostCommentBean {
     
     public String postComment(Users users, Image image) {
         comment.setImage(image);
+        //comment.setImage(imageDAO.find(2L));
         comment.setUsers(users);
         
         Calendar calendar = Calendar.getInstance();

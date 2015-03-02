@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <f:metadata>
         <f:viewParam name="img_id" value="#{detailImageBean.imageId}" />
         <f:event type="preRenderView" listener="#{detailImageBean.init()}" />
@@ -13,17 +14,19 @@
     </h:head>
     <h:body>
         <h1><h:outputText value="#{detailImageBean.image.title}"></h:outputText></h1>
+        <h:outputText value="#{detailImageBean.image.id}"/><br/>
         <h:graphicImage value="/images/#{detailImageBean.image.filename}"/>
         <h1>Commentaire</h1>
-        <c:forEach items="#{commentController.getCommentsByImage(detailImageBean.image)}" var="comment">
-            <h:outputText value="#{comment.users.userName}"/><br/>
+        <ui:repeat value="#{detailImageBean.image.comments}" var="comment">
+            <h:outputText value="#{comment.users.userName}:"/>
             <h:outputText value="#{comment.content}"/><br/>
-        </c:forEach>
+        </ui:repeat>
+
         
         <h:form>
             <h:outputLabel for="content" value="Commentaire" /><br/>
-            <h:inputTextarea id="content" value="#{postCommentBean.comment}"/><br/>
-            <h:commandButton action="#{postCommentBean.postComment(userSession, detailImageBean.image)}" value="post" /><br/>
+            <h:inputTextarea id="content" value="#{postCommentBean.comment.content}"/><br/>
+            <h:commandButton action="#{postCommentBean.postComment(userSession, imageController.getImageById(detailImageBean.imageId))}" value="post" /><br/>
         </h:form>
         
     </h:body>

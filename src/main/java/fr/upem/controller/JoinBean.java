@@ -10,6 +10,7 @@ import fr.upem.entity.Users;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -35,6 +36,9 @@ public class JoinBean implements Serializable{
     public String join() {
         userDAO.create(user);
         
-        return "connexion";
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+                .put("userSession", user);
+        
+        return null;
     }
 }

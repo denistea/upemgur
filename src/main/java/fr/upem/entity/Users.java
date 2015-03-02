@@ -6,14 +6,17 @@
 package fr.upem.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -50,7 +53,13 @@ public class Users implements Serializable {
     @Size(min = 4)
     @Column(nullable = false)
     private String password;
-
+    
+    @OneToMany(mappedBy="users", fetch = FetchType.LAZY)
+    private List<Comment> comment;
+    
+    @OneToMany(mappedBy="users", fetch = FetchType.LAZY)
+    private List<Image> users;
+    
     public Users() {
     }
 
@@ -92,12 +101,26 @@ public class Users implements Serializable {
         this.password = password;
     }
 
+    public List<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<Comment> comment) {
+        this.comment = comment;
+    }
+
+    public List<Image> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<Image> users) {
+        this.users = users;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 5;
         hash = 47 * hash + Objects.hashCode(this.id);
-        hash = 47 * hash + Objects.hashCode(this.email);
-        hash = 47 * hash + Objects.hashCode(this.userName);
         return hash;
     }
 
@@ -113,12 +136,7 @@ public class Users implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.userName, other.userName)) {
-            return false;
-        }
         return true;
     }
+
 }

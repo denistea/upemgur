@@ -24,10 +24,6 @@ public class DetailImageBean {
     private Image image;
     private Long imageId;
     
-    public DetailImageBean() {
-        image = new Image();
-    }
-    
     public void init() {
         if (imageId == null) {
             return;
@@ -46,7 +42,5 @@ public class DetailImageBean {
     public void setImageId(Long imageId) {
         this.imageId = imageId;
     }
-    
-    
-    
+
 }

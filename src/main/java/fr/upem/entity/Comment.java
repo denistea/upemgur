@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,14 +37,15 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String content;
+
     private Timestamp time;
     
-    @ManyToOne(cascade = REMOVE)
-    @JoinColumn(name="users_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="users_id", nullable = false)
     private Users users;
     
-    @ManyToOne(cascade = REMOVE)
-    @JoinColumn(name="image_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="image_id", nullable = false)
     private Image image;
     
     public Comment() {

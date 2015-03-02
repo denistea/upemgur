@@ -65,10 +65,10 @@ public class UploadImageBean {
         }
         
         //Metadata
-        image.setDimX(bf.getWidth());
-        image.setDimY(bf.getHeight());
+        image.setDimX(new Long(bf.getWidth()));
+        image.setDimY(new Long(bf.getHeight()));
         
-        image.setNbView(0);
+        image.setNbView(0L);
         image.setUsers(users);
         
         Calendar calendar = Calendar.getInstance();

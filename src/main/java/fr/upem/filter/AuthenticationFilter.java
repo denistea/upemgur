@@ -41,7 +41,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         if(httpRequest.getSession().getAttribute("userSession") == null) {
-            httpResponse.sendRedirect("../connexion.xhtml");
+            httpResponse.sendRedirect("../index.xhtml");
         }
         else {
             chain.doFilter(request, response);
