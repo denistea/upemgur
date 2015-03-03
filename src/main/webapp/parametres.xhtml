@@ -79,7 +79,7 @@
     </nav>
 
     <!-- Modal -->
-    <h:panelGroup layout="block" class="modal fade" id="connexionModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
+    <div layout="block" class="modal fade" id="connexionModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
       <h:panelGroup layout="block" class="modal-dialog modal-sm">
         <h:panelGroup layout="block" class="modal-content">
           <h:form>
@@ -101,9 +101,9 @@
           </h:form>
         </h:panelGroup>
       </h:panelGroup>
-    </h:panelGroup>
+    </div>
 
-    <h:panelGroup layout="block" class="modal fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionTitle" aria-hidden="true">
+    <div layout="block" class="modal fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionTitle" aria-hidden="true">
       <h:panelGroup layout="block" class="modal-dialog modal-sm">
         <h:panelGroup layout="block" class="modal-content">
           <h:panelGroup layout="block" class="modal-header">
@@ -148,10 +148,10 @@
           </h:panelGroup>
         </h:panelGroup>
       </h:panelGroup>
-    </h:panelGroup>
+    </div>
     
     <c:if test="#{authenticateBean.signedIn}">
-        <h:panelGroup layout="block" class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
+        <div layout="block" class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
           <h:panelGroup layout="block" class="modal-dialog">
             <h:panelGroup layout="block" class="modal-content">
               <h:panelGroup layout="block" class="modal-header">
@@ -176,7 +176,7 @@
               </h:panelGroup>
             </h:panelGroup>
           </h:panelGroup>
-        </h:panelGroup>
+        </div>
     </c:if>
     
     
