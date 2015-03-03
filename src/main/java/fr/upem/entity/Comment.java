@@ -8,9 +8,6 @@ package fr.upem.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,7 +26,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
     @NamedQuery(name = "Comment.findByUsers", query = "SELECT c FROM Comment c WHERE c.users = :users"),
-    @NamedQuery(name = "Comment.findByImage", query = "SELECT c FROM Comment c WHERE c.image = :image"),      
+    @NamedQuery(name = "Comment.findByImage", query = "SELECT c FROM Comment c WHERE c.image = :image ORDER BY c.time DESC"),      
 })
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;

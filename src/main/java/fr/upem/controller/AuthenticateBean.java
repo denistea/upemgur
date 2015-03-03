@@ -37,12 +37,12 @@ public class AuthenticateBean implements Serializable{
     
     public String signIn() {
         //Find User in Database
-        Users userDB = userDAO.findByUserName(login);
+        Users userDB = userDAO.findByUserName(login.toUpperCase());
         
         
         //Test if userName exist
         if(userDB == null) {
-            userDB = userDAO.findByEmail(login);
+            userDB = userDAO.findByEmail(login.toUpperCase());
             
             if(userDB == null) {
                 return null;
@@ -62,7 +62,7 @@ public class AuthenticateBean implements Serializable{
     public String signOut() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .remove("userSession");
-        return "#";
+        return null;
     }
     
     public String getLogin() {

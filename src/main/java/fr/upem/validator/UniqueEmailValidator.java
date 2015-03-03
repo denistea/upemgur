@@ -27,7 +27,7 @@ public class UniqueEmailValidator implements Validator{
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String email = (String) value;
-        if(userDAO.findByEmail(email) != null) {
+        if(userDAO.findByEmail(email.toUpperCase()) != null) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email address already used", null));
         }
     }

@@ -48,17 +48,6 @@
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" data-toggle="modal" data-target="#connexionModal">Connexion</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#inscriptionModal">Inscription</a></li>
-                <!-- Button trigger modal -->
-
-
-                <li class="dropdown hidden">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Miguel <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Mon compte</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Se deconnecter</a></li>
-                  </ul>
-                </li> 
               </ul>
             </div>
         </c:if>
@@ -72,7 +61,7 @@
                 <li><button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#uploadModal">Upload image</button></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <h:outputText value="#{userSession.userName}"/>
+                        <h:outputText value="#{userSession.userName.substring(0, 1).toUpperCase()}#{userSession.userName.substring(1).toLowerCase()}"/>
                         <span class="caret"></span>
                     </a>
                     
@@ -80,7 +69,7 @@
                       <li><a href="#">Mon profil</a></li>
                       <li><a href="parametres.xhtml">Paramètres</a></li>
                       <li class="divider"></li>
-                      <li><a href="#{authenticateBean.signOut()}">Se deconnecter</a></li>
+                      <li><a href="">Se deconnecter</a></li>
                     </ul>
                 </li>
               </ul>
@@ -161,7 +150,35 @@
         </div>
       </div>
     </div>
-
+    
+    <c:if test="#{authenticateBean.signedIn}">
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="connexionTitle">Uploder une image</h4>
+              </div>
+              <div class="modal-body">
+                <h:form enctype="multipart/form-data">
+                  <div class="form-group">
+                    <h:inputFile id="inputImage" value="#{uploadImageBean.part}"/>
+                  </div>
+                  <div class="form-group">
+                    <h:outputLabel for="inputTitle" value="Titre"/>
+                    <h:inputText class="form-control" id="inputTitle" value="#{uploadImageBean.image.title}"/>
+                  </div>
+                  <div class="form-group">
+                    <h:outputLabel for="inputDescription" value="Description"/>
+                    <h:inputTextarea class="form-control" rows="3" id="inputDescription" value="#{uploadImageBean.image.descriptioin}"/>
+                  </div>
+                  <h:commandButton class="btn btn-primary" action="#{uploadImageBean.uploadFile(userSession)}" value="Envoyer" />
+                </h:form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </c:if>
 
     <div class="container content">
       <div class="page-header">
@@ -208,10 +225,11 @@
           <a href="images/sample/4.jpg">
               <img alt="Title 1" src="resources/images/sample/4.jpg"/>
           </a>
-          <ui:repeat value="#{imageController.allImage}" var="image">
-            <a href="images/#{image.filename}">
-                <h:graphicImage alt="#{image.title}" value="/images/#{image.filename}"/>
-            </a>
+          <ui:repeat value="#{imageController.getAllImage()}" var="image">
+                <h:link outcome="image.xhtml">
+                    <h:graphicImage alt="#{image.title}" value="/images/#{image.filename}"/>
+                    <f:param name="img_id" value="#{image.id}"/>
+                </h:link>
           </ui:repeat>
   
           

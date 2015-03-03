@@ -38,7 +38,6 @@ public class PostCommentBean {
     
     public String postComment(Users users, Image image) {
         comment.setImage(image);
-        //comment.setImage(imageDAO.find(2L));
         comment.setUsers(users);
         
         Calendar calendar = Calendar.getInstance();
@@ -46,8 +45,8 @@ public class PostCommentBean {
         comment.setTime(new Timestamp(now.getTime()));
 
         commentDAO.create(comment);
-        
-        return null;
+        comment = new Comment();
+        return "image.xhtml?img_id="+image.getId();
     }
 
     public Comment getComment() {

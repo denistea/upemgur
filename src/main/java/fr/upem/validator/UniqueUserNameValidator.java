@@ -26,7 +26,7 @@ public class UniqueUserNameValidator implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String userName = (String) value;
-        if(userDAO.findByUserName(userName) != null) {
+        if(userDAO.findByUserName(userName.toUpperCase()) != null) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "UserName already used", null));
         }
     }    

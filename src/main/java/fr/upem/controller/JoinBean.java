@@ -34,6 +34,8 @@ public class JoinBean implements Serializable{
     }
     
     public String join() {
+        user.setUserName(user.getUserName().toUpperCase());
+        user.setEmail(user.getEmail().toUpperCase());
         userDAO.create(user);
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()

@@ -3,14 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+  <f:metadata>
+      <f:viewParam name="img_id" value="#{detailImageBean.imageId}" />
+      <f:event type="preRenderView" listener="#{detailImageBean.init()}" />
+  </f:metadata>
   <h:head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Bootstrap 101 Template</title>
 
-    <link rel="stylesheet" href="css/justifiedGallery.min.css"/>
+    <link rel="stylesheet" href="resources/css/justifiedGallery.min.css"/>
     <script src="resources/js/jquery-1.11.2.min.js"></script>
     <script src="resources/js/jquery.justifiedGallery.min.js"></script>
     <script src="resources/js/script.js"></script>
@@ -18,7 +24,6 @@
     <!-- Bootstrap -->
     <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="resources/css/style.css"/>
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -180,32 +185,86 @@
     </c:if>
     
     
-    <div class="container content">
-      <div class="row">
-        <div class="col-sm-3 sidebar">
-          <ul class="nav nav-pills nav-stacked nav-sidebar">
-            <li role="presentation" class="active"><a href="#">Compte</a></li>
-            <li role="presentation"><a href="#">Mot de passe</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-5 content-right">
-          <h2 class="custom-title">Compte</h2>
-          <form>
-            <div class="form-group">
-              <label for="inputEmail">Email</label>
-              <input type="email" class="form-control" id="inputEmail" value="current.email@test.fr"/>
-            </div>
-            <div class="form-group">
-              <label for="inputPseudo">Pseudo</label>
-              <input type="text" class="form-control" id="inputPseudo" value="CurrentPseudo"/>
-            </div>
-            <button type="submit" class="btn btn-primary">Sauvegarder</button>
-          </form>
-          <br/>
-          <a href="#">Supprimer mon compte</a>
-        </div>
-      </div>
-    </div>
+    <h:panelGroup layout="block" class="image-holder">
+        <a href="images/#{detailImageBean.image.filename}">
+            <h:graphicImage value="/images/#{detailImageBean.image.filename}" height="470px"/>
+        </a>
+    </h:panelGroup>
+    <h:panelGroup layout="block" class="container content" >
+      <h:panelGroup layout="block" class="row">
+        <h:panelGroup layout="block" class="col-sm-8" id="comments">
+            <h1><h:outputText value="#{detailImageBean.image.title}"/></h1>
+            <p>par <a href="#"><h:outputText value="#{detailImageBean.image.users.userName.substring(0, 1).toUpperCase()}#{detailImageBean.image.users.userName.substring(1).toLowerCase()}"/></a></p>
+            <p><h:outputText value="#{detailImageBean.image.descriptioin}"/></p>
+
+          <h3>Commentaires</h3>
+          <h:form>
+              <h:inputTextarea id="content" class="form-control" rows="3" value="#{postCommentBean.comment.content}" p:placeholder="Tapez votre commentaire"/>
+              <h:panelGroup layout="block" class="submit-comment">
+                  <c:if test="#{authenticateBean.signedIn}">
+                  <h:commandLink class="btn btn-primary" action="#{postCommentBean.postComment(userSession, imageController.getImageById(detailImageBean.imageId))}" value="Envoyer">
+                      <f:ajax render=":comments" execute="@form"/>
+                      <f:param name="img_id" value="#{detailImageBean.imageId}"/>
+                  </h:commandLink>
+                  </c:if>
+                  <c:if test="#{not authenticateBean.signedIn}">
+                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#connexionModal">Envoyer</a>
+                  </c:if>
+              </h:panelGroup>
+          </h:form>
+          
+          <ui:repeat value="#{commentController.getCommentsByImage(imageController.getImageById(detailImageBean.imageId))}" var="comment">
+            <h:panelGroup layout="block" class="media">
+              <h:panelGroup layout="block" class="media-left">
+                <a href="#">
+                  <img class="media-object" src="resources/images/sample/2.jpg" alt="image" width="50px" height="50px"/>
+                </a>
+              </h:panelGroup>
+              <h:panelGroup layout="block" class="media-body">
+                  <h4 class="media-heading">#{comment.users.userName.substring(0, 1).toUpperCase()}#{comment.users.userName.substring(1).toLowerCase()}</h4>
+                  <h:outputText value="#{comment.content}"/>
+              </h:panelGroup>
+            </h:panelGroup>      
+          </ui:repeat>
+
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="col-sm-4">
+          <h3>Exif <small><span class="glyphicon glyphicon-chevron-down" data-toggle="collapse" href="#exifInfo" aria-expanded="false" aria-controls="collapseExample" aria-hidden="true"></span></small></h3>
+          <h:panelGroup layout="block" class="collapse" id="exifInfo">
+<pre>Make - Apple
+Orientation - Horizontal (normal)
+X-Resolution - 72 dpi
+Y-Resolution - 72 dpi
+Software - 3.1.2
+Date and Time (Modified) - 2010:02:22 16:50:29
+YCbCr Positioning - Centered
+ISO Speed - 187
+Exif Version - 0221
+Date and Time (Original) - 2010:02:22 16:50:29
+Date and Time (Digitized) - 2010:02:22 16:50:29
+Components Configuration - Y, Cb, Cr, -
+Metering Mode - Average
+Flashpix Version - 0100
+Color Space - sRGB
+Sensing Method - One-chip color area
+Exposure Mode - Auto
+White Balance - Auto
+Sharpness - Soft
+Compression - JPEG (old-style)
+Orientation - Horizontal (normal)
+Thumbnail Offset - 832
+Thumbnail Length - 12332
+Camera ID - 72157620775652629
+Camera Type - Cameraphone</pre>
+          </h:panelGroup>
+        </h:panelGroup>
+      </h:panelGroup>
+      <h:panelGroup layout="block" class="row">
+        <h:panelGroup layout="block" class="col-sm-8">
+
+        </h:panelGroup>
+      </h:panelGroup>
+    </h:panelGroup>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="resources/js/bootstrap.min.js"></script>
   </h:body>
