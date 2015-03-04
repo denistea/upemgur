@@ -7,6 +7,7 @@ package fr.upem.dao;
 
 import fr.upem.entity.Image;
 import fr.upem.entity.Users;
+import java.sql.Timestamp;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -37,10 +38,16 @@ public class ImageDAO extends DAO<Image>{
                   .getResultList();
     }
     
-    public List<Image> findByTitle(String title) {
-        return em.createNamedQuery("Image.findByTitle", Image.class)
+    public List<Image> findLikeTitle(String title) {
+        return em.createNamedQuery("Image.findLikeTitle", Image.class)
                  .setParameter("title", "%"+title+"%")
                  .getResultList();
     }
     
+    public List<Image> findByTimeRange(Timestamp time, int max) {
+        return em.createNamedQuery("Image.findByTitle", Image.class)
+                 .setMaxResults(max)
+                 .setParameter("time", time)
+                 .getResultList();           
+    }
 }

@@ -58,10 +58,13 @@ public class UserDAO extends DAO<Users> {
         return users.get(0);
     }
     
-    public List<Users> findAllSortedBy(int maxResult, String...attrs) {
-        em.createQuery("SELECT u FROM Users u ORDER BY ");
-        
-        
+    public List<Users> findBeginUserName(String userName) {
+        return em.createNamedQuery("Users.findBeginUserName", Users.class) 
+                  .setParameter("userName", userName+"%") 
+                  .getResultList();
+    }
+    
+    public List<Users> findAllSortedBy(int maxResult, String...attrs) { 
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Users> query = builder.createQuery(Users.class);
         Root<Users> users = query.from(Users.class);

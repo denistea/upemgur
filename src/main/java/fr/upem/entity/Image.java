@@ -9,10 +9,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,9 +28,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i"),
-    @NamedQuery(name = "Image.findByUsers", query = "SELECT i FROM Image i WHERE i.users = :users"),
-    @NamedQuery(name = "Image.findByTitle", query = "SELECT i FROM Image i WHERE i.title LIKE :title")
+    @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i ORDER BY i.time DESC"),
+    @NamedQuery(name = "Image.findByUsers", query = "SELECT i FROM Image i WHERE i.users = :users ORDER BY i.time DESC"),
+    @NamedQuery(name = "Image.findLikeTitle", query = "SELECT i FROM Image i WHERE i.title LIKE :title ORDER BY i.time DESC"),
+    @NamedQuery(name = "Image.findByTimeRange", query = "SELECT i FROM Image i WHERE i.time < :time ORDER BY i.time DESC")
 })
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;
