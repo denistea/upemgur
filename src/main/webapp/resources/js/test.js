@@ -32,14 +32,7 @@ $(document).ready(function(){ // Quand le document est complètement chargé
                         }
                 });
                 
-                $(".image-container").justifiedGallery({
-        rowHeight : 200,
-        margins : 3,
-        fixedHeight : true,
-        captionSettings : { animationDuration : 100,
-                            visibleOpacity : 0.7,
-                            nonVisibleOpacity : 0.0}
-    });
+                $(".image-container").justifiedGallery('norewind');
               }
 
       });
