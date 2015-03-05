@@ -17,8 +17,8 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("")
-@SessionScoped
+//@Named("")
+//@SessionScoped
 public class UsersController implements Serializable {
     @EJB
     UserDAO userDAO;

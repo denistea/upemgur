@@ -5,7 +5,6 @@
  */
 package fr.upem.controller2;
 
-import static com.oracle.jrockit.jfr.ContentType.Timestamp;
 import fr.upem.dao.CommentDAO;
 import fr.upem.entity.Comment;
 import fr.upem.entity.Image;
@@ -14,7 +13,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -22,8 +20,8 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("")
-@SessionScoped
+//@Named("")
+//@SessionScoped
 public class CommentController implements Serializable {
     
     @EJB

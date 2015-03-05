@@ -31,8 +31,8 @@ import javax.servlet.http.Part;
  *
  * @author Denis
  */
-@Named("")
-@RequestScoped
+//@Named("")
+//@RequestScoped
 public class UploadImageController {
     @EJB
     private ImageDAO imageDAO;

@@ -16,8 +16,8 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("")
-@RequestScoped
+//@Named("")
+//@RequestScoped
 public class AuthController {
     private String login;
     private String password;

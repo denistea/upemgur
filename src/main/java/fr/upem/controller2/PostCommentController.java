@@ -21,8 +21,8 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("")
-@RequestScoped
+//@Named("")
+//@RequestScoped
 public class PostCommentController {
     @EJB
     private CommentDAO commentDAO;

@@ -16,8 +16,8 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("")
-@RequestScoped
+//@Named("")
+//@RequestScoped
 public class JoinController {
     @EJB
     private UserDAO userDAO;

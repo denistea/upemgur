@@ -22,8 +22,8 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("")
-@SessionScoped
+//@Named("")
+//@SessionScoped
 public class ImageController implements Serializable{
     @EJB
     private ImageDAO imageDAO;
