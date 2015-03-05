@@ -41,7 +41,7 @@ public class LoadImageServlet extends HttpServlet {
         
         Long image_id = Long.parseLong(request.getParameter("img_id"));
         Image image = imageController.getImageById(image_id);
-        List<Image> images = imageController.getTimeRangeImages(image.getTime(), 10);
+        List<Image> images = imageController.getTimeRangeImages(image.getTime(), 20);
         StringBuilder data = new StringBuilder();
         for(Image i : images) {
             data.append("<a class=\"image\" id=\"")

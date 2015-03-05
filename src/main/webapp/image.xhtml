@@ -30,21 +30,21 @@
 
                   <h3>Commentaires</h3>
                   <h:form>
-                      <h:inputTextarea id="content" class="form-control" rows="3" value="#{postCommentBean.comment.content}" p:placeholder="Tapez votre commentaire"/>
+                      <h:inputTextarea id="content" class="form-control" rows="3" value="#{postCommentController.comment.content}" p:placeholder="Tapez votre commentaire"/>
                       <h:panelGroup layout="block" class="submit-comment">
-                          <c:if test="#{authenticateBean.signedIn}">
-                          <h:commandLink class="btn btn-primary" action="#{postCommentBean.postComment(userSession, imageController.getImageById(detailImageBean.imageId))}" value="Envoyer">
+                          <c:if test="#{authController.signedIn}">
+                          <h:commandLink class="btn btn-primary" action="#{postCommentController.postComment(userSession, imageController.getImageById(detailImageBean.imageId))}" value="Envoyer">
                               <f:ajax render=":comments" execute="@form"/>
                               <f:param name="img_id" value="#{detailImageBean.imageId}"/>
                           </h:commandLink>
                           </c:if>
-                          <c:if test="#{not authenticateBean.signedIn}">
+                          <c:if test="#{not authController.signedIn}">
                           <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#connexionModal">Envoyer</a>
                           </c:if>
                       </h:panelGroup>
                   </h:form>
 
-                  <ui:repeat value="#{commentController.getCommentsByImage(imageController.getImageById(detailImageBean.imageId))}" var="comment">
+                  <ui:repeat value="#{commentController.getComments(imageController.getImageById(detailImageBean.imageId))}" var="comment">
                     <h:panelGroup layout="block" class="media">
                       <h:panelGroup layout="block" class="media-left">
                         <a href="#">

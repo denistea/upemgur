@@ -6,7 +6,6 @@
 package fr.upem.controller;
 
 import fr.upem.dao.CommentDAO;
-import fr.upem.dao.ImageDAO;
 import fr.upem.entity.Comment;
 import fr.upem.entity.Image;
 import fr.upem.entity.Users;
@@ -21,18 +20,15 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("postCommentBean")
+@Named("postCommentController")
 @RequestScoped
-public class PostCommentBean {
+public class PostCommentController {
     @EJB
     private CommentDAO commentDAO;
     
-    @EJB
-    private ImageDAO imageDAO;
-    
     private Comment comment;
     
-    public PostCommentBean() {
+    public PostCommentController() {
         comment = new Comment();
     }
     
@@ -52,6 +48,4 @@ public class PostCommentBean {
     public Comment getComment() {
         return comment;
     }
-    
-    
 }

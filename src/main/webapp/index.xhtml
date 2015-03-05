@@ -58,7 +58,7 @@
                       <img alt="Title 1" src="resources/images/sample/4.jpg"/>
                   </a>
                     
-                  <ui:repeat value="#{imageController.getImages(1)}" var="image">
+                  <ui:repeat value="#{imageController.getImages(20)}" var="image">
                         <a class="image" id="#{image.id}" href="image.xhtml?img_id=#{image.id}">
                             <img alt="#{image.title}" src="/upemgur/images/#{image.filename}"/>
                         </a>

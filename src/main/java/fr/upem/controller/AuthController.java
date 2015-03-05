@@ -7,7 +7,6 @@ package fr.upem.controller;
 
 import fr.upem.dao.UserDAO;
 import fr.upem.entity.Users;
-import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -17,18 +16,14 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("authenticateBean")
+@Named("authController")
 @RequestScoped
-public class AuthenticateBean implements Serializable{
-    
+public class AuthController {
     private String login;
     private String password;
     
     @EJB
     private UserDAO userDAO;
-    
-    public AuthenticateBean() {
-    }
     
     public boolean isSignedIn() {
        return FacesContext.getCurrentInstance().getExternalContext()
@@ -81,5 +76,4 @@ public class AuthenticateBean implements Serializable{
         this.password = password;
     }
 
-    
 }

@@ -46,7 +46,7 @@
               </h:panelGroup>
 
               <!-- Collect the nav links, forms, and other content for toggling -->
-              <c:if test="#{not authenticateBean.signedIn}">
+              <c:if test="#{not authController.signedIn}">
                   <h:panelGroup layout="block" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                       <li><a href="#" data-toggle="modal" data-target="#connexionModal">Connexion</a></li>
@@ -55,7 +55,7 @@
                   </h:panelGroup>
               </c:if>
 
-              <c:if test="#{authenticateBean.signedIn}">
+              <c:if test="#{authController.signedIn}">
                   <h:panelGroup layout="block" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                       <li><a href="#">Uploader une image</a></li>
@@ -83,7 +83,7 @@
           </nav>
 
           <!-- Modal -->
-          <c:if test="#{not authenticateBean.signedIn}">
+          <c:if test="#{not authController.signedIn}">
             <div layout="block" class="modal fade" id="connexionModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
               <h:panelGroup layout="block" class="modal-dialog modal-sm">
                 <h:panelGroup layout="block" class="modal-content">
@@ -95,13 +95,13 @@
                     <h:panelGroup layout="block" class="modal-body">
                       <h:panelGroup layout="block" class="form-group">
                         <h:outputLabel for="SignInLogin">Email ou Login</h:outputLabel>
-                        <h:inputText class="form-control" id="SignInLogin" value="#{authenticateBean.login}"/>
+                        <h:inputText class="form-control" id="SignInLogin" value="#{authController.login}"/>
                       </h:panelGroup>
                       <h:panelGroup layout="block" class="form-group">
                         <h:outputLabel for="SignInPassword">Mot de passe</h:outputLabel>
-                        <h:inputSecret class="form-control" id="SignInPassword" value="#{authenticateBean.password}"/>
+                        <h:inputSecret class="form-control" id="SignInPassword" value="#{authController.password}"/>
                       </h:panelGroup>
-                      <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authenticateBean.signIn()}"/>
+                      <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authController.signIn()}"/>
                     </h:panelGroup>
                   </h:form>
                 </h:panelGroup>
@@ -119,7 +119,7 @@
                     <h:form id="subscriptionForm">
                       <h:panelGroup layout="block" class="form-group">
                         <h:outputLabel for="inputEmail">Email</h:outputLabel>
-                        <h:inputText class="form-control" id="inputEmail" value="#{joinBean.user.email}">
+                        <h:inputText class="form-control" id="inputEmail" value="#{joinController.user.email}">
                             <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                             <f:validator validatorId="uniqueEmailValidator" />
                             <f:ajax event="blur" render="m_email" />
@@ -127,7 +127,7 @@
                       </h:panelGroup>
                       <h:panelGroup layout="block" class="form-group">
                         <h:outputLabel for="inputLogin">Login</h:outputLabel>
-                        <h:inputText class="form-control" id="inputLogin" value="#{joinBean.user.userName}">
+                        <h:inputText class="form-control" id="inputLogin" value="#{joinController.user.userName}">
                             <f:validateRegex pattern="[^\W\d_]\w*" />
                             <f:validateLength minimum="3"/>
                             <f:validator validatorId="uniqueUserNameValidator" />
@@ -136,7 +136,7 @@
                       </h:panelGroup>
                       <h:panelGroup layout="block" class="form-group">
                         <h:outputLabel for="inputPassword">Mot de passe</h:outputLabel>
-                        <h:inputSecret class="form-control" id="inputPassword" value="#{joinBean.user.password}">
+                        <h:inputSecret class="form-control" id="inputPassword" value="#{joinController.user.password}">
                             <f:validator validatorId="confirmPasswordValidator" />
                             <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
                             <f:ajax event="blur" execute="password confirm" render="m_password" />
@@ -148,7 +148,7 @@
                             <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
                         </h:inputSecret>
                       </h:panelGroup>
-                      <h:commandButton class="btn btn-primary btn-block" value="S'inscrire" action="#{joinBean.join}"/>
+                      <h:commandButton class="btn btn-primary btn-block" value="S'inscrire" action="#{joinController.join}"/>
                     </h:form>
                   </h:panelGroup>
                 </h:panelGroup>
@@ -156,7 +156,7 @@
             </div>
           </c:if>
           
-          <c:if test="#{authenticateBean.signedIn}">
+          <c:if test="#{authController.signedIn}">
               <div layout="block" class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
                 <h:panelGroup layout="block" class="modal-dialog">
                   <h:panelGroup layout="block" class="modal-content">
@@ -167,17 +167,17 @@
                     <h:panelGroup layout="block" class="modal-body">
                       <h:form enctype="multipart/form-data">
                         <h:panelGroup layout="block" class="form-group">
-                          <h:inputFile id="inputImage" value="#{uploadImageBean.part}"/>
+                          <h:inputFile id="inputImage" value="#{uploadImageController.part}"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" class="form-group">
                           <h:outputLabel for="inputTitle" value="Titre"/>
-                          <h:inputText class="form-control" id="inputTitle" value="#{uploadImageBean.image.title}"/>
+                          <h:inputText class="form-control" id="inputTitle" value="#{uploadImageController.image.title}"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" class="form-group">
                           <h:outputLabel for="inputDescription" value="Description"/>
-                          <h:inputTextarea class="form-control" rows="3" id="inputDescription" value="#{uploadImageBean.image.descriptioin}"/>
+                          <h:inputTextarea class="form-control" rows="3" id="inputDescription" value="#{uploadImageController.image.descriptioin}"/>
                         </h:panelGroup>
-                        <h:commandButton class="btn btn-primary" action="#{uploadImageBean.uploadFile(userSession)}" value="Envoyer" />
+                        <h:commandButton class="btn btn-primary" action="#{uploadImageController.uploadFile(userSession)}" value="Envoyer" />
                       </h:form>
                     </h:panelGroup>
                   </h:panelGroup>

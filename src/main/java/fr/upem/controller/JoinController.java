@@ -7,7 +7,6 @@ package fr.upem.controller;
 
 import fr.upem.dao.UserDAO;
 import fr.upem.entity.Users;
-import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -17,15 +16,14 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("joinBean")
+@Named("joinController")
 @RequestScoped
-public class JoinBean implements Serializable{
-    
+public class JoinController {
     @EJB
     private UserDAO userDAO;
     private Users user;
     
-    public JoinBean() {
+    public JoinController() {
         user = new Users();
     }
 
@@ -42,5 +40,5 @@ public class JoinBean implements Serializable{
                 .put("userSession", user);
         
         return null;
-    }
+    } 
 }

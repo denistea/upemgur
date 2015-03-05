@@ -9,7 +9,6 @@ import fr.upem.dao.ImageDAO;
 import fr.upem.entity.Image;
 import fr.upem.entity.Users;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -32,19 +31,16 @@ import javax.servlet.http.Part;
  *
  * @author Denis
  */
-@Named("uploadImageBean")
+@Named("uploadImageController")
 @RequestScoped
-public class UploadImageBean {
-    
-    private final static String PATH = "C:/var/webapp/images";
-    
+public class UploadImageController {
     @EJB
     private ImageDAO imageDAO;
     
     private Part part;
     private Image image;
 
-    public UploadImageBean() {
+    public UploadImageController() {
         image = new Image();
     }
     
@@ -76,17 +72,9 @@ public class UploadImageBean {
         Date now = calendar.getTime();
         image.setTime(new Timestamp(now.getTime()));
 
-        /*try {
-            BufferedImage bf = ImageIO.read(part.getInputStream());
-        } catch (IOException ex) {
-            
-        }*/
-        System.out.println(part.getContentType());
-        
         //Upload the file
         Path basePath = Paths.get(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("IMAGE_DIR"));
         image.setFilename(part.getSubmittedFileName());
-        File file = basePath.resolve(part.getSubmittedFileName()).toFile();
         
         try (InputStream is = part.getInputStream()){
             Path filepath = Files.createTempFile(basePath,"",".jpg");

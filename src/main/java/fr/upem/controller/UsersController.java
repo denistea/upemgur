@@ -7,9 +7,10 @@ package fr.upem.controller;
 
 import fr.upem.dao.UserDAO;
 import fr.upem.entity.Users;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -17,28 +18,28 @@ import javax.inject.Named;
  * @author Denis
  */
 @Named("usersController")
-@RequestScoped
-public class UsersController {
+@SessionScoped
+public class UsersController implements Serializable {
     @EJB
     UserDAO userDAO;
     
     public void updateUser(Users user) {
+        user.setUserName(user.getUserName().toUpperCase());
+        user.setEmail(user.getEmail().toUpperCase());
         
-    }
-    
-    public void changeAccountSetting(Users user) {
-        
-    }
-    
-    public void changePassword(Users user) {
-        
+        userDAO.update(user);
     }
     
     public List<Users> getAllUsers() {
-        return null;
+        return userDAO.findAll();
     }
     
     public void removeUser(Users user) {
-        
+        userDAO.delete(user);
+    } 
+    
+    public List<Users> searchUsers(String userName) {
+        return userDAO.findBeginUserName(userName);
     }
+    
 }

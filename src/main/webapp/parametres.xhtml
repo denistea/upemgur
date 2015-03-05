@@ -21,23 +21,22 @@
               </div>
               <div class="col-sm-5 content-right">
                 <h2 class="custom-title">Compte</h2>
-                <form>
+                <h:form>
                   <div class="form-group">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" value="current.email@test.fr"/>
+                    <h:outputLabel for="inputEmail">Email</h:outputLabel>
+                    <h:inputText class="form-control" id="inputEmail" value="#{userSession.email}"/>
                   </div>
                   <div class="form-group">
-                    <label for="inputPseudo">Pseudo</label>
-                    <input type="text" class="form-control" id="inputPseudo" value="CurrentPseudo"/>
+                    <h:outputLabel for="inputPseudo">Pseudo</h:outputLabel>
+                    <h:inputText class="form-control" id="inputPseudo" value="#{userSession.userName}"/>       
                   </div>
-                  <button type="submit" class="btn btn-primary">Sauvegarder</button>
-                </form>
+                    <h:commandButton class="btn btn-primary" value="Sauvegarder" action="#{usersController.updateUser(userSession)}"/>
+                </h:form>
                 <br/>
                 <a href="#">Supprimer mon compte</a>
               </div>
           </div>
         </div>
-            
         </ui:define>
     </ui:composition>
   </h:body>
