@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i ORDER BY i.time DESC"),
     @NamedQuery(name = "Image.findByUsers", query = "SELECT i FROM Image i WHERE i.users = :users ORDER BY i.time DESC"),
     @NamedQuery(name = "Image.findLikeTitle", query = "SELECT i FROM Image i WHERE i.title LIKE :title ORDER BY i.time DESC"),
-    @NamedQuery(name = "Image.findByTimeRange", query = "SELECT i FROM Image i WHERE i.time < :time ORDER BY i.time DESC")
+    @NamedQuery(name = "Image.findByTimeRange", query = "SELECT i FROM Image i WHERE i.time < :time ORDER BY i.time DESC"),
 })
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;

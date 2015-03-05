@@ -45,9 +45,15 @@ public class ImageDAO extends DAO<Image>{
     }
     
     public List<Image> findByTimeRange(Timestamp time, int max) {
-        return em.createNamedQuery("Image.findByTitle", Image.class)
+        return em.createNamedQuery("Image.findByTimeRange", Image.class)
                  .setMaxResults(max)
                  .setParameter("time", time)
                  .getResultList();           
+    }
+    
+    public List<Image> findLimit(int max) {
+        return em.createNamedQuery("Image.findAll", Image.class)
+                 .setMaxResults(max)
+                 .getResultList();  
     }
 }
