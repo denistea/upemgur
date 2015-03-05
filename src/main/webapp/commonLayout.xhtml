@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title><ui:insert name="title">Upemgur</ui:insert></title>
 
+        <link rel="icon" type="image/png" href="resources/images/icon.png" />
         <link rel="stylesheet" href="resources/css/justifiedGallery.min.css"/>
         <script src="resources/js/jquery-1.11.2.min.js"></script>
         <script src="resources/js/jquery.justifiedGallery.min.js"></script>
@@ -69,7 +70,7 @@
                           </a>
 
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="user.xhtml?userId=#{userSession.id}">Mon profil</a></li>
+                            <li><a href="user.xhtml?userName=#{userSession.userName}">Mon profil</a></li>
                             <li><a href="parametres.xhtml">Paramètres</a></li>
                             <li class="divider"></li>
                             <li><a href="">Se déconnecter</a></li>

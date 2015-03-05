@@ -20,18 +20,18 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-//@Named("")
-//@SessionScoped
+@Named("commentController")
+@SessionScoped
 public class CommentController implements Serializable {
     
     @EJB
     private CommentDAO commentDAO;
     
-    public List<Comment> getComments(Users users) {
+    public List<Comment> getCommentsByUser(Users users) {
         return commentDAO.findByUsers(users);
     }
     
-    public List<Comment> getComments(Image image) {
+    public List<Comment> getCommentsByImage(Image image) {
         return commentDAO.findByImage(image);
     }  
     

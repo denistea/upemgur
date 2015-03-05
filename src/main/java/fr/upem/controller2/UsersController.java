@@ -17,8 +17,8 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-//@Named("")
-//@SessionScoped
+@Named("usersController")
+@SessionScoped
 public class UsersController implements Serializable {
     @EJB
     UserDAO userDAO;
@@ -37,6 +37,10 @@ public class UsersController implements Serializable {
     
     public List<Users> searchUsers(String userName) {
         return userDAO.findBeginUserName(userName);
+    }
+    
+    public Users getUserByUserName(String userName) {
+        return userDAO.findByUserName(userName);
     }
     
 }

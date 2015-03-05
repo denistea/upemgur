@@ -18,7 +18,7 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("commentController")
+@Named("commentController1")
 @RequestScoped
 public class CommentController {
     @EJB

@@ -104,6 +104,14 @@ body {
     font-size: 12px;
 }
 
+.close-image {
+    z-index: 1;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    opacity: 0.4;
+}
+
 /*body {
 	margin: 0;
 	padding: 0;
