@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.Objects;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -23,9 +23,8 @@ import javax.inject.Named;
  * @author Denis
  */
 @Named("imageController")
-@RequestScoped
-public class ImageController implements Serializable {
-    
+@SessionScoped
+public class ImageController implements Serializable{
     @EJB
     private ImageDAO imageDAO;
     
@@ -33,18 +32,24 @@ public class ImageController implements Serializable {
         return imageDAO.find(id);
     }
     
-    public List<Image> getAllImage() {
+    public List<Image> getAllImages() {
         return imageDAO.findAll();
     }
     
     public List<Image> getImagesByUser(Users user) {
-        Objects.requireNonNull(user);
-        
         return imageDAO.findByUsers(user);
     }
     
     public List<Image> searchImagesByTitle(String title) {
         return imageDAO.findLikeTitle(title);
+    }
+    
+    public List<Image> getTimeRangeImages(Timestamp time, int max) {
+        return imageDAO.findByTimeRange(time, max);
+    }
+    
+    public List<Image> getImages(int max) {
+        return imageDAO.findLimit(max);
     }
     
     public void removeImage(Image image) {
@@ -53,6 +58,5 @@ public class ImageController implements Serializable {
         } catch (IOException ex) {
         }
         imageDAO.delete(image);
-    }
-    
+    }  
 }

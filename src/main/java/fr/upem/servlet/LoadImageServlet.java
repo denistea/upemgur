@@ -5,8 +5,12 @@
  */
 package fr.upem.servlet;
 
+import fr.upem.controller.ImageController;
+import fr.upem.entity.Image;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoadImageServlet", urlPatterns = {"/LoadImageServlet"})
 public class LoadImageServlet extends HttpServlet {
 
+    @Inject
+    ImageController imageController;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,19 +38,29 @@ public class LoadImageServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoadImageServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoadImageServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        Long image_id = Long.parseLong(request.getParameter("img_id"));
+        Image image = imageController.getImageById(image_id);
+        List<Image> images = imageController.getTimeRangeImages(image.getTime(), 2);
+        StringBuilder data = new StringBuilder();
+        for(Image i : images) {
+            data.append("<a class=\"image\" id=\"")
+                .append(i.getId())
+                .append(i.getId())
+                .append("\" href=\"image.xhtml?img_id=")
+                .append(i.getId())
+                .append("\">\n<img alt=\"")
+                .append(i.getTitle())
+                .append("\" src=\"/upemgur/images/")
+                .append(i.getFilename())
+                .append("\"/>\n</a>");
         }
+        
+        response.setContentType("text/html");
+        response.setCharacterEncoding( "UTF-8" );
+        PrintWriter out = response.getWriter();
+        
+        out.write(data.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

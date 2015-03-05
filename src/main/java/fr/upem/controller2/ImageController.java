@@ -22,7 +22,7 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-//@Named("")
+//@Named("imageController")
 //@SessionScoped
 public class ImageController implements Serializable{
     @EJB
@@ -46,6 +46,10 @@ public class ImageController implements Serializable{
     
     public List<Image> getTimeRangeImages(Timestamp time, int max) {
         return imageDAO.findByTimeRange(time, max);
+    }
+    
+    public List<Image> getImages(int max) {
+        return imageDAO.findLimit(max);
     }
     
     public void removeImage(Image image) {
