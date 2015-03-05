@@ -14,6 +14,7 @@
   </h:head>
   <h:body>
     <ui:composition template="commonLayout.xhtml">
+        <ui:define name="title">#{detailImageBean.image.title}</ui:define>        
         <ui:define name="content">   
 
             <h:panelGroup layout="block" class="image-holder">
