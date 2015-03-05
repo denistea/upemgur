@@ -98,6 +98,123 @@
                       <img alt="Title 1" src="resources/images/sample/4.jpg"/>
                   </a>
                     
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Mon profil</a></li>
+                      <li><a href="parametres.xhtml">Paramètres</a></li>
+                      <li class="divider"></li>
+                      <li><a href="">Se deconnecter</a></li>
+                    </ul>
+                </li>
+              </ul>
+            </div>
+        </c:if>
+        
+      </div>
+    </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="connexionModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <h:form>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="connexionTitle">Connexion</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <h:outputLabel for="SignInLogin">Email ou Login</h:outputLabel>
+                <h:inputText class="form-control" id="SignInLogin" value="#{authenticateBean.login}"/>
+              </div>
+              <div class="form-group">
+                <h:outputLabel for="SignInPassword">Mot de passe</h:outputLabel>
+                <h:inputSecret class="form-control" id="SignInPassword" value="#{authenticateBean.password}"/>
+              </div>
+              <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authenticateBean.signIn()}"/>
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#inscriptionModal">Pas encore inscrit?</a>
+            </div>  
+          </h:form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="inscriptionTitle">Inscription</h4>
+          </div>
+          <div class="modal-body">
+            <h:form id="subscriptionForm">
+              <div class="form-group">
+                <h:outputLabel for="inputEmail">Email</h:outputLabel>
+                <h:inputText class="form-control" id="inputEmail" value="#{joinBean.user.email}">
+                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                    <f:validator validatorId="uniqueEmailValidator" />
+                    <!--<f:ajax event="blur" render="m_email" />-->
+                </h:inputText>
+                <span id="badEmail" class="error-message sr-only">L'email n'est pas valide</span>
+              </div>
+              <div class="form-group">
+                <h:outputLabel for="inputLogin">Login</h:outputLabel>
+                <h:inputText class="form-control" id="inputLogin" value="#{joinBean.user.userName}">
+                    <f:validateRegex pattern="[^\W\d_]\w*" />
+                    <f:validateLength minimum="3"/>
+                    <f:validator validatorId="uniqueUserNameValidator" />
+                    <!--<f:ajax event="blur" render="m_login" />-->
+                </h:inputText>
+                <span id="badLogin" class="error-message sr-only">Le login doit contenir au moins 3 caractères</span>
+              </div>
+              <div class="form-group">
+                <h:outputLabel for="inputPassword">Mot de passe</h:outputLabel>  <span id="badPassword" class="error-message sr-only">L'email n'est pas valide</span>
+                <h:inputSecret class="form-control" id="inputPassword" value="#{joinBean.user.password}">
+                    <f:validator validatorId="confirmPasswordValidator" />
+                    <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+                    <!--<f:ajax event="blur" execute="password confirm" render="m_password" />-->
+                </h:inputSecret>
+              </div>
+              <div class="form-group">
+                <h:outputLabel for="confirmPassword">Confirmer mot de passe</h:outputLabel>
+                <h:inputSecret class="form-control" id="confirmPassword" binding="#{confirmPassword}">
+                    <!--<f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />-->
+                </h:inputSecret>
+              </div>
+              <h:commandButton class="btn btn-primary btn-block" value="S'inscrire" action="#{joinBean.join}"/>
+            </h:form>
+          </div>
+          <div class="modal-footer">
+            <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#connexionModal">Déjà inscrit?</a>
+          </div> 
+        </div>
+      </div>
+    </div>
+    
+    <c:if test="#{authenticateBean.signedIn}">
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="connexionTitle">Uploder une image</h4>
+              </div>
+              <div class="modal-body">
+                <h:form enctype="multipart/form-data">
+                  <div class="form-group">
+                    <h:inputFile id="inputImage" value="#{uploadImageBean.part}"/>
+                  </div>
+                  <div class="form-group">
+                    <h:outputLabel for="inputTitle" value="Titre"/>
+                    <h:inputText class="form-control" id="inputTitle" value="#{uploadImageBean.image.title}"/>
+                  </div>
+                  <div class="form-group">
+                    <h:outputLabel for="inputDescription" value="Description"/>
+                    <h:inputTextarea class="form-control" rows="3" id="inputDescription" value="#{uploadImageBean.image.descriptioin}"/>
+                  </div>
+                  <h:commandButton class="btn btn-primary" action="#{uploadImageBean.uploadFile(userSession)}" value="Envoyer" />
+                </h:form>
                     
                     
                  <a href="image.html">
