@@ -5,13 +5,11 @@
  */
 package fr.upem.util;
 
-import fr.upem.controller.JoinController;
 import fr.upem.dao.UserDAO;
 import fr.upem.entity.Users;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Startup;
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
@@ -26,6 +24,6 @@ public class DBSetup {
     
     @PostConstruct
     public void initDB() {
-        userDAO.create(new Users("DENIS", "denis", "DENIS@FREE.FR"));
+        userDAO.create(new Users("ADMIN", "admin", "admin@upemgur.fr"));
     }
 }
