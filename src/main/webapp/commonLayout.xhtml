@@ -9,8 +9,9 @@
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>Bootstrap 101 Template</title>
+        <title><ui:insert name="title">Upemgur</ui:insert></title>
 
+        <link rel="icon" type="image/png" href="resources/images/icon.png" />
         <link rel="stylesheet" href="resources/css/justifiedGallery.min.css"/>
         <script src="resources/js/jquery-1.11.2.min.js"></script>
         <script src="resources/js/jquery.justifiedGallery.min.js"></script>
@@ -69,10 +70,10 @@
                           </a>
 
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Mon profil</a></li>
+                            <li><a href="user.xhtml?userName=#{userSession.userName}">Mon profil</a></li>
                             <li><a href="parametres.xhtml">Paramètres</a></li>
                             <li class="divider"></li>
-                            <li><a href="">Se deconnecter</a></li>
+                            <li><a href="">Se déconnecter</a></li>
                           </ul>
                       </li>
                     </ul>
@@ -101,7 +102,10 @@
                         <h:outputLabel for="SignInPassword">Mot de passe</h:outputLabel>
                         <h:inputSecret class="form-control" id="SignInPassword" value="#{authController.password}"/>
                       </h:panelGroup>
-                      <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authController.signIn()}"/>
+                      <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authenticateBean.signIn()}"/>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="modal-footer">
+                        <a href="#" data-dismiss ="modal" data-toggle="modal" data-target="#inscriptionModal">Pas encore inscrit ?</a>
                     </h:panelGroup>
                   </h:form>
                 </h:panelGroup>
@@ -150,6 +154,9 @@
                       </h:panelGroup>
                       <h:commandButton class="btn btn-primary btn-block" value="S'inscrire" action="#{joinController.join}"/>
                     </h:form>
+                  </h:panelGroup>
+                  <h:panelGroup layout="block" class="modal-footer">
+                    <a href="#" data-dismiss ="modal" data-toggle="modal" data-target="#connexionModal">Déjà inscrit ?</a>
                   </h:panelGroup>
                 </h:panelGroup>
               </h:panelGroup>
