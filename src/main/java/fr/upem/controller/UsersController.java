@@ -42,4 +42,8 @@ public class UsersController implements Serializable {
         return userDAO.findBeginUserName(userName);
     }
     
+    public Users getUserByUserName(String userName) {
+        return userDAO.findByUserName(userName);
+    }
+    
 }

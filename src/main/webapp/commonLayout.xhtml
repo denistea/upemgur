@@ -30,12 +30,12 @@
     </h:head>
  
     <h:body>
-
+        <h:panelGroup id="contentWrapper">
         <ui:insert name="nav" >
             <nav class="navbar navbar-default">
-            <h:panelGroup layout="block" class="container">
+            <div class="container">
               <!-- Brand and toggle get grouped for better mobile display -->
-              <h:panelGroup layout="block" class="navbar-header">
+              <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
@@ -44,20 +44,20 @@
                 <a class="navbar-brand brand-logo" href="index.xhtml">
                   <img alt="upemgur" src="resources/images/logo.png"/>
                 </a>
-              </h:panelGroup>
+              </div>
 
               <!-- Collect the nav links, forms, and other content for toggling -->
               <c:if test="#{not authController.signedIn}">
-                  <h:panelGroup layout="block" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                       <li><a href="#" data-toggle="modal" data-target="#connexionModal">Connexion</a></li>
                       <li><a href="#" data-toggle="modal" data-target="#inscriptionModal">Inscription</a></li> 
                     </ul>
-                  </h:panelGroup>
+                  </div>
               </c:if>
 
               <c:if test="#{authController.signedIn}">
-                  <h:panelGroup layout="block" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                       <li><a href="#">Uploader une image</a></li>
                     </ul>
@@ -77,59 +77,59 @@
                           </ul>
                       </li>
                     </ul>
-                  </h:panelGroup>
+                  </div>
               </c:if>
 
-            </h:panelGroup>
+            </div>
           </nav>
 
           <!-- Modal -->
           <c:if test="#{not authController.signedIn}">
             <div layout="block" class="modal fade" id="connexionModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
-              <h:panelGroup layout="block" class="modal-dialog modal-sm">
-                <h:panelGroup layout="block" class="modal-content">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
                   <h:form>
-                    <h:panelGroup layout="block" class="modal-header">
+                    <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title" id="connexionTitle">Connexion</h4>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" class="modal-body">
-                      <h:panelGroup layout="block" class="form-group">
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group">
                         <h:outputLabel for="SignInLogin">Email ou Login</h:outputLabel>
                         <h:inputText class="form-control" id="SignInLogin" value="#{authController.login}"/>
-                      </h:panelGroup>
-                      <h:panelGroup layout="block" class="form-group">
+                      </div>
+                      <div class="form-group">
                         <h:outputLabel for="SignInPassword">Mot de passe</h:outputLabel>
                         <h:inputSecret class="form-control" id="SignInPassword" value="#{authController.password}"/>
-                      </h:panelGroup>
-                      <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authenticateBean.signIn()}"/>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" class="modal-footer">
+                      </div>
+                      <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authController.signIn()}"/>
+                    </div>
+                    <div class="modal-footer">
                         <a href="#" data-dismiss ="modal" data-toggle="modal" data-target="#inscriptionModal">Pas encore inscrit ?</a>
-                    </h:panelGroup>
+                    </div>
                   </h:form>
-                </h:panelGroup>
-              </h:panelGroup>
+                </div>
+              </div>
             </div>
 
             <div layout="block" class="modal fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionTitle" aria-hidden="true">
-              <h:panelGroup layout="block" class="modal-dialog modal-sm">
-                <h:panelGroup layout="block" class="modal-content">
-                  <h:panelGroup layout="block" class="modal-header">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="inscriptionTitle">Inscription</h4>
-                  </h:panelGroup>
-                  <h:panelGroup layout="block" class="modal-body">
+                  </div>
+                  <div class="modal-body">
                     <h:form id="subscriptionForm">
-                      <h:panelGroup layout="block" class="form-group">
+                      <div class="form-group">
                         <h:outputLabel for="inputEmail">Email</h:outputLabel>
                         <h:inputText class="form-control" id="inputEmail" value="#{joinController.user.email}">
                             <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                             <f:validator validatorId="uniqueEmailValidator" />
                             <f:ajax event="blur" render="m_email" />
                         </h:inputText>
-                      </h:panelGroup>
-                      <h:panelGroup layout="block" class="form-group">
+                      </div>
+                      <div class="form-group">
                         <h:outputLabel for="inputLogin">Login</h:outputLabel>
                         <h:inputText class="form-control" id="inputLogin" value="#{joinController.user.userName}">
                             <f:validateRegex pattern="[^\W\d_]\w*" />
@@ -137,67 +137,70 @@
                             <f:validator validatorId="uniqueUserNameValidator" />
                             <f:ajax event="blur" render="m_login" />
                         </h:inputText>
-                      </h:panelGroup>
-                      <h:panelGroup layout="block" class="form-group">
+                      </div>
+                      <div class="form-group">
                         <h:outputLabel for="inputPassword">Mot de passe</h:outputLabel>
                         <h:inputSecret class="form-control" id="inputPassword" value="#{joinController.user.password}">
                             <f:validator validatorId="confirmPasswordValidator" />
                             <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
                             <f:ajax event="blur" execute="password confirm" render="m_password" />
                         </h:inputSecret>
-                      </h:panelGroup>
-                      <h:panelGroup layout="block" class="form-group">
+                      </div>
+                      <div class="form-group">
                         <h:outputLabel for="confirmPassword">Confirmer mot de passe</h:outputLabel>
                         <h:inputSecret class="form-control" id="confirmPassword" binding="#{confirmPassword}">
-                            <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
+                            <f:ajax event="blur" execute="password confirmPassword" render="m_password m_confirm" />
                         </h:inputSecret>
-                      </h:panelGroup>
+                      </div>
                       <h:commandButton class="btn btn-primary btn-block" value="S'inscrire" action="#{joinController.join}"/>
                     </h:form>
-                  </h:panelGroup>
-                  <h:panelGroup layout="block" class="modal-footer">
+                  </div>
+                  <div class="modal-footer">
                     <a href="#" data-dismiss ="modal" data-toggle="modal" data-target="#connexionModal">Déjà inscrit ?</a>
-                  </h:panelGroup>
-                </h:panelGroup>
-              </h:panelGroup>
+                  </div>
+                </div>
+              </div>
             </div>
           </c:if>
           
           <c:if test="#{authController.signedIn}">
               <div layout="block" class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="connexionTitle" aria-hidden="true">
-                <h:panelGroup layout="block" class="modal-dialog">
-                  <h:panelGroup layout="block" class="modal-content">
-                    <h:panelGroup layout="block" class="modal-header">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title" id="connexionTitle">Uploder une image</h4>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" class="modal-body">
+                    </div>
+                    <div class="modal-body">
                       <h:form enctype="multipart/form-data">
-                        <h:panelGroup layout="block" class="form-group">
+                        <div class="form-group">
                           <h:inputFile id="inputImage" value="#{uploadImageController.part}"/>
-                        </h:panelGroup>
-                        <h:panelGroup layout="block" class="form-group">
+                        </div>
+                        <div class="form-group">
                           <h:outputLabel for="inputTitle" value="Titre"/>
                           <h:inputText class="form-control" id="inputTitle" value="#{uploadImageController.image.title}"/>
-                        </h:panelGroup>
-                        <h:panelGroup layout="block" class="form-group">
+                        </div>
+                        <div class="form-group">
                           <h:outputLabel for="inputDescription" value="Description"/>
                           <h:inputTextarea class="form-control" rows="3" id="inputDescription" value="#{uploadImageController.image.descriptioin}"/>
-                        </h:panelGroup>
-                        <h:commandButton class="btn btn-primary" action="#{uploadImageController.uploadFile(userSession)}" value="Envoyer" />
+                        </div>
+                          <h:commandLink class="btn btn-primary" action="#{uploadImageController.uploadFile(userSession)}" value="Envoyer">
+                              <f:param name="userName" value="#{userSession.userName}"/>
+                          </h:commandLink>
                       </h:form>
-                    </h:panelGroup>
-                  </h:panelGroup>
-                </h:panelGroup>
+                    </div>
+                  </div>
+                </div>
               </div>
           </c:if>
         </ui:insert>
 
 
-        <ui:insert name="content" >
-          <div class="container content">
-          </div>
-        </ui:insert>
+            <ui:insert name="content" id="content" >
+              <div class="container content">
+              </div>
+            </ui:insert>
+        </h:panelGroup>
 	    
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="resources/js/bootstrap.min.js"></script>

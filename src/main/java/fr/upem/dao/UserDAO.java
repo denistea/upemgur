@@ -6,7 +6,6 @@
 package fr.upem.dao;
 
 import fr.upem.entity.Users;
-import fr.upem.entity.Users_;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;

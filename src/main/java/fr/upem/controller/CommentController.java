@@ -27,15 +27,15 @@ public class CommentController implements Serializable {
     @EJB
     private CommentDAO commentDAO;
     
-    public List<Comment> getComments(Users users) {
+    public List<Comment> getCommentsByUser(Users users) {
         return commentDAO.findByUsers(users);
     }
     
-    public List<Comment> getComments(Image image) {
+    public List<Comment> getCommentsByImage(Image image) {
         return commentDAO.findByImage(image);
     }  
     
-    public List<Comment> getComments(Image image, Users user) {
+    public List<Comment> getCommentsByImageUser(Image image, Users user) {
         return commentDAO.findByImageUsers(image, user);
     }
     

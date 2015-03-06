@@ -5,30 +5,32 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+      <f:viewParam name="userName" value="#{userName}" />
+    </f:metadata>
     <h:head>
     </h:head>
     <h:body> 
-
         <ui:composition template="commonLayout.xhtml">
             <ui:define name="content">
                 <div class="container content">
                     <div class="row">
                         <div class="col-sm-3 sidebar">
                             <ul class="nav nav-pills nav-stacked nav-sidebar">
-                                <li><h3><h:outputText value="#{param['userName'].substring(0, 1).toUpperCase()}#{param['userName'].substring(1).toLowerCase()}"/></h3></li>
+                                <li><h3><h:outputText value="#{userName.substring(0, 1).toUpperCase()}#{userName.substring(1).toLowerCase()}"/></h3></li>
                                 <li class="nav-separator"></li>
-                                <li role="presentation"><a href="user.xhtml?userName=#{param['userName']}">Images</a></li>
-                                <li role="presentation" class="active"><a href="user-comments.xhtml?userName=#{param['userName']}">Commentaires</a></li>
+                                <li role="presentation"><a href="user.xhtml?userName=#{userName}">Images</a></li>
+                                <li role="presentation" class="active"><a href="user-comments.xhtml?userName=#{userName}">Commentaires</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-9 content-right">
-                            <ui:repeat value="#{commentController.getCommentsByUser(usersController.getUserByUserName(param['userName']))}" var="comment">
+                            <ui:repeat value="#{commentController.getCommentsByUser(usersController.getUserByUserName(userName))}" var="comment">
                                 <div class="panel panel-default">
                                   <div class="panel-body">
-                                      <c:if test="#{userSession.userName eq param['userName']}">
+                                      <c:if test="#{userSession.userName eq userName}">
                                         <h:form>
                                             <h:commandLink type="button" class="close" action="#{commentController.removeComment(comment)}" value="&times;">
-                                                <f:param name="userName" value="#{param['userName']}"/>
+                                                <f:param name="userName" value="#{userName}"/>
                                             </h:commandLink>
                                         </h:form>
                                       </c:if>

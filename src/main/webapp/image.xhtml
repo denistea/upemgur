@@ -17,13 +17,13 @@
         <ui:define name="title">#{detailImageBean.image.title}</ui:define>        
         <ui:define name="content">   
 
-            <h:panelGroup layout="block" class="image-holder">
+            <div class="image-holder">
                 <a href="images/#{detailImageBean.image.filename}">
                     <h:graphicImage value="/images/#{detailImageBean.image.filename}" height="470px"/>
                 </a>
-            </h:panelGroup>
-            <h:panelGroup layout="block" class="container content" >
-              <h:panelGroup layout="block" class="row">
+            </div>
+            <div class="container content" >
+              <div class="row">
                 <h:panelGroup layout="block" class="col-sm-8" id="comments">
                     <h1><h:outputText value="#{detailImageBean.image.title}"/></h1>
                     <p>par <a href="#"><h:outputText value="#{detailImageBean.image.users.userName.substring(0, 1).toUpperCase()}#{detailImageBean.image.users.userName.substring(1).toLowerCase()}"/></a></p>
@@ -32,7 +32,7 @@
                   <h3>Commentaires</h3>
                   <h:form>
                       <h:inputTextarea id="content" class="form-control" rows="3" value="#{postCommentController.comment.content}" p:placeholder="Tapez votre commentaire"/>
-                      <h:panelGroup layout="block" class="submit-comment">
+                      <div class="submit-comment">
                           <c:if test="#{authController.signedIn}">
                           <h:commandLink class="btn btn-primary" action="#{postCommentController.postComment(userSession, imageController.getImageById(detailImageBean.imageId))}" value="Envoyer">
                               <f:ajax render=":comments" execute="@form"/>
@@ -42,27 +42,22 @@
                           <c:if test="#{not authController.signedIn}">
                           <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#connexionModal">Envoyer</a>
                           </c:if>
-                      </h:panelGroup>
+                      </div>
                   </h:form>
 
-                  <ui:repeat value="#{commentController.getComments(imageController.getImageById(detailImageBean.imageId))}" var="comment">
-                    <h:panelGroup layout="block" class="media">
-                      <h:panelGroup layout="block" class="media-left">
-                        <a href="#">
-                          <img class="media-object" src="resources/images/sample/2.jpg" alt="image" width="50px" height="50px"/>
-                        </a>
-                      </h:panelGroup>
-                      <h:panelGroup layout="block" class="media-body">
+                  <ui:repeat value="#{commentController.getCommentsByImage(imageController.getImageById(detailImageBean.imageId))}" var="comment">
+                    <div class="media">
+                      <div class="media-body">
                           <h4 class="media-heading">#{comment.users.userName.substring(0, 1).toUpperCase()}#{comment.users.userName.substring(1).toLowerCase()}</h4>
                           <h:outputText value="#{comment.content}"/>
-                      </h:panelGroup>
-                    </h:panelGroup>      
+                      </div>
+                    </div>      
                   </ui:repeat>
 
                 </h:panelGroup>
-                <h:panelGroup layout="block" class="col-sm-4">
+                <div class="col-sm-4">
                   <h3>Exif <small><span class="glyphicon glyphicon-chevron-down" data-toggle="collapse" href="#exifInfo" aria-expanded="false" aria-controls="collapseExample" aria-hidden="true"></span></small></h3>
-                  <h:panelGroup layout="block" class="collapse" id="exifInfo">
+                  <div class="collapse" id="exifInfo">
 <pre>Make - Apple
 Orientation - Horizontal (normal)
 X-Resolution - 72 dpi
@@ -88,15 +83,15 @@ Thumbnail Offset - 832
 Thumbnail Length - 12332
 Camera ID - 72157620775652629
 Camera Type - Cameraphone</pre>
-                  </h:panelGroup>
-                </h:panelGroup>
-              </h:panelGroup>
-              <h:panelGroup layout="block" class="row">
-                <h:panelGroup layout="block" class="col-sm-8">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-8">
 
-                </h:panelGroup>
-              </h:panelGroup>
-            </h:panelGroup>
+                </div>
+              </div>
+            </div>
         </ui:define>
     </ui:composition>
   </h:body>

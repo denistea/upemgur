@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -54,7 +55,7 @@ public class Image implements Serializable {
     @JoinColumn(name="users_id", nullable = false)
     private Users users;
     
-    @OneToMany(mappedBy="image", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="image", fetch = FetchType.LAZY, cascade = REMOVE)
     private List<Comment> comments;
     
     public Image() {

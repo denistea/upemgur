@@ -14,7 +14,7 @@ $(document).ready(function(){ // Quand le document est complètement chargé
               lance la fonction. */
               console.log($(document).height() - $(window).height() - 10);
               console.log($(window).scrollTop());
-              if(($(document).height() - $(window).height() - 10) <= $(window).scrollTop()
+              if(($(document).height() - $(window).height() - 220) <= $(window).scrollTop()
                   && !load){
                 console.log("End Reached");
                 var last_id = $('.image:last').attr('id');
