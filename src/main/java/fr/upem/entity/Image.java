@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
+import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,10 +53,10 @@ public class Image implements Serializable {
     private Long nbView;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="users_id", nullable = false)
+    @JoinColumn(name="users_id")
     private Users users;
     
-    @OneToMany(mappedBy="image", fetch = FetchType.LAZY, cascade = REMOVE)
+    @OneToMany(mappedBy="image", fetch = FetchType.LAZY)
     private List<Comment> comments;
     
     public Image() {

@@ -185,7 +185,8 @@
                           <h:inputTextarea class="form-control" rows="3" id="inputDescription" value="#{uploadImageController.image.descriptioin}"/>
                         </div>
                           <h:commandLink class="btn btn-primary" action="#{uploadImageController.uploadFile(userSession)}" value="Envoyer">
-                              <f:param name="userName" value="#{userSession.userName}"/>
+                              <!--<f:ajax render="@all" execute="@form"/>-->
+                              <!--<f:param name="userName" value="#{userSession.userName}"/>-->
                           </h:commandLink>
                       </h:form>
                     </div>

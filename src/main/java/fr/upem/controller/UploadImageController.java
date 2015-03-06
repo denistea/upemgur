@@ -85,7 +85,7 @@ public class UploadImageController {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.toString(), null));
         }
         imageDAO.create(image);
-        return "user.xhtml";
+        return "user.xhtml?faces-redirect=true&includeViewParams=true&userName="+users.getUserName();
     }
 
     public Part getPart() {

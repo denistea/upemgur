@@ -5,9 +5,12 @@
  */
 package fr.upem.entity;
 
+import static java.awt.Event.DELETE;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,10 +59,10 @@ public class Users implements Serializable {
     @Column(nullable = false)
     private String password;
     
-    @OneToMany(mappedBy="users", fetch = FetchType.LAZY, cascade = REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy="users", fetch = FetchType.LAZY)
     private List<Comment> comment;
     
-    @OneToMany(mappedBy="users", fetch = FetchType.LAZY, cascade = REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy="users", fetch = FetchType.LAZY)
     private List<Image> users;
     
     public Users() {

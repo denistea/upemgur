@@ -23,7 +23,7 @@
                                 <li role="presentation"><a href="user-comments.xhtml?userName=#{userName}">Commentaires</a></li>
                             </ul>
                         </div>
-                        <div class="col-sm-9 content-right">
+                        <h:panelGroup layout="block" class="col-sm-9 content-right" id="images">
                             <div class="image-container">
                                 <ui:repeat value="#{imageController.getImagesByUser(usersController.getUserByUserName(userName))}" var="image">
                                     <div>
@@ -31,6 +31,7 @@
                                             <h:form>
                                                 <h:commandLink type="button" class="close close-image" action="#{imageController.removeImage(image)}" value="&times;">
                                                     <f:param name="userName" value="#{userName}"/>
+                                                    <!--<f:ajax render=":images" execute="@form" onevent="reload"/>-->
                                                 </h:commandLink>
                                             </h:form>
                                         </c:if>
@@ -41,7 +42,7 @@
                                     </div>
                                 </ui:repeat>
                             </div>
-                        </div>
+                        </h:panelGroup>
                     </div>
                 </div>
 
