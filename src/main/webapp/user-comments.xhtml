@@ -24,10 +24,10 @@
                             </ul>
                         </div>
                         <div class="col-sm-9 content-right">
-                            <ui:repeat value="#{commentController.getCommentsByUser(usersController.getUserByUserName(userName))}" var="comment">
+                            <ui:repeat value="#{commentController.getCommentsByUser(usersController.getUserByUserName(param['userName']))}" var="comment">
                                 <div class="panel panel-default">
                                   <div class="panel-body">
-                                      <c:if test="#{userSession.userName eq userName}">
+                                      <c:if test="#{userSession.userName eq param['userName']}">
                                         <h:form>
                                             <h:commandLink type="button" class="close" action="#{commentController.removeComment(comment)}" value="&times;">
                                                 <f:param name="userName" value="#{userName}"/>

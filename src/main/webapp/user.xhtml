@@ -25,9 +25,9 @@
                         </div>
                         <h:panelGroup layout="block" class="col-sm-9 content-right" id="images">
                             <div class="image-container">
-                                <ui:repeat value="#{imageController.getImagesByUser(usersController.getUserByUserName(userName))}" var="image">
+                                <ui:repeat value="#{imageController.getImagesByUser(usersController.getUserByUserName(param['userName']))}" var="image">
                                     <div>
-                                        <c:if test="#{userSession.userName eq userName}">
+                                        <c:if test="#{userSession.userName eq param['userName']}">
                                             <h:form>
                                                 <h:commandLink type="button" class="close close-image" action="#{imageController.removeImage(image)}" value="&times;">
                                                     <f:param name="userName" value="#{userName}"/>
