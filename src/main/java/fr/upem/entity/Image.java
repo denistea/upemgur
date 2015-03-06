@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REFRESH;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  *
@@ -54,10 +56,10 @@ public class Image implements Serializable {
     private Long nbView;
     
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name="users_id")
+    @JoinColumn(name="users_id", nullable = false)
     private Users users;
-    
-    @OneToMany(mappedBy="image", fetch = FetchType.LAZY, orphanRemoval = true)
+    @CascadeOnDelete
+    @OneToMany(mappedBy="image", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Comment> comments;
     
     public Image() {

@@ -8,6 +8,7 @@ package fr.upem.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.ws.rs.DELETE;
 
 /**
  *
@@ -39,12 +41,12 @@ public class Comment implements Serializable {
 
     private Timestamp time;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="users_id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name="users_id", nullable = false)
     private Users users;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="image_id")
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name="image_id", nullable = false)
     private Image image;
     
     public Comment() {

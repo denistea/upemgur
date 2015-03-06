@@ -42,7 +42,7 @@ public class PostCommentController {
 
         commentDAO.create(comment);
         comment = new Comment();
-        return "image.xhtml?img_id="+image.getId();
+        return "image.xhtml?faces-redirect=true&includeViewParams=true&img_id="+image.getId();
     }
 
     public Comment getComment() {
