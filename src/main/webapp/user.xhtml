@@ -25,9 +25,7 @@
                         </div>
                         <h:panelGroup layout="block" class="col-sm-9 content-right" id="images">
                             <div class="image-container">
-                                <c:forEach var="image" items="#{imageController.getImagesByUser(usersController.getUserByUserName(param['userName']))}">
-    
-                                <!--<ui:repeat value="#{imageController.getImagesByUser(usersController.getUserByUserName(param['userName']))}" var="image">-->
+                                <ui:repeat value="#{imageController.getImagesByUser(usersController.getUserByUserName(param['userName']))}" var="image">
                                     <div>
                                         <c:if test="#{userSession.userName eq param['userName']}">
                                             <h:form>

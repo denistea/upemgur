@@ -2,24 +2,36 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="index.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="user-comments.xhtml" x="150" y="900" zoom="true"/>
         <Node id="connexion.xhtml" x="150" y="450" zoom="true"/>
         <Node id="template/user-comments.html" x="1150" y="150" zoom="true"/>
-        <Node id="test/index.xhtml" x="650" y="150" zoom="true"/>
-        <Node id="template/index-connecte.html" x="650" y="300" zoom="true"/>
-        <Node id="image.xhtml" x="400" y="600" zoom="true"/>
-        <Node id="inscription.xhtml" x="150" y="600" zoom="true"/>
-        <Node id="template/image.html" x="150" y="300" zoom="true"/>
-        <Node id="template/user.html" x="900" y="450" zoom="true"/>
+        <Node id="template/admin/index.html" x="1650" y="150" zoom="true"/>
         <Node id="test/connexion.xhtml" x="400" y="150" zoom="true"/>
         <Node id="test/image.xhtml" x="650" y="450" zoom="true"/>
         <Node id="parametres.xhtml" x="400" y="300" zoom="true"/>
         <Node id="test/newTemplate.xhtml" x="900" y="150" zoom="true"/>
-        <Node id="restricted/test.xhtml" x="900" y="300" zoom="true"/>
         <Node id="test/inscription.xhtml" x="400" y="450" zoom="true"/>
-        <Node id="template/index.html" x="150" y="750" zoom="true"/>
+        <Node id="parametres-password.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="admin/index.jsf.xhtml" x="400" y="750" zoom="true"/>
         <Node id="template/parametres.html" x="1150" y="300" zoom="true"/>
         <Node id="restricted/setting.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="index.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="test/index.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="template/index-connecte.html" x="650" y="300" zoom="true"/>
+        <Node id="image.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="inscription.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="default.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="template/image.html" x="150" y="300" zoom="true"/>
+        <Node id="template/user.html" x="900" y="450" zoom="true"/>
+        <Node id="admin/utilisateur-liste.html" x="650" y="600" zoom="true"/>
+        <Node id="admin/utilisateur-recherche.html" x="1650" y="300" zoom="true"/>
+        <Node id="commonLayout.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="admin/utilisateur-liste.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="user.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="restricted/test.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="template/index.html" x="150" y="750" zoom="true"/>
+        <Node id="template/admin/utilisateur-liste.html" x="900" y="600" zoom="true"/>
+        <Node id="template/admin/utilisateur-recherche.html" x="150" y="1050" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
