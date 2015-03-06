@@ -7,7 +7,7 @@ package fr.upem.controller;
 
 import fr.upem.dao.ImageDAO;
 import fr.upem.entity.Image;
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +44,7 @@ public class UploadImageController {
         image = new Image();
     }
     
-    public String uploadFile(Users users){
+    public String uploadFile(User user){
         System.out.println(part.getContentType());
         if(!"image/jpeg".equals(part.getContentType())) {
             return null;
@@ -66,7 +66,7 @@ public class UploadImageController {
         image.setDimY(new Long(bf.getHeight()));
         
         image.setNbView(0L);
-        image.setUsers(users);
+        image.setUser(user);
         
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
@@ -85,7 +85,7 @@ public class UploadImageController {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.toString(), null));
         }
         imageDAO.create(image);
-        return "user.xhtml?faces-redirect=true&includeViewParams=true&userName="+users.getUserName();
+        return "user.xhtml?faces-redirect=true&includeViewParams=true&userName="+user.getUserName();
     }
 
     public Part getPart() {

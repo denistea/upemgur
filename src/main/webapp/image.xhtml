@@ -26,7 +26,7 @@
               <div class="row">
                 <h:panelGroup layout="block" class="col-sm-8" id="comments">
                     <h1><h:outputText value="#{detailImageBean.image.title}"/></h1>
-                    <p>par <a href="#"><h:outputText value="#{detailImageBean.image.users.userName.substring(0, 1).toUpperCase()}#{detailImageBean.image.users.userName.substring(1).toLowerCase()}"/></a></p>
+                    <p>par <a href="user.xhtml?userName=#{detailImageBean.image.user.userName}"><h:outputText value="#{detailImageBean.image.user.userName.substring(0, 1).toUpperCase()}#{detailImageBean.image.user.userName.substring(1).toLowerCase()}"/></a></p>
                     <p><h:outputText value="#{detailImageBean.image.description}"/></p>
 
                   <h3>Commentaires</h3>
@@ -48,7 +48,7 @@
                   <ui:repeat value="#{commentController.getCommentsByImage(imageController.getImageById(detailImageBean.imageId))}" var="comment">
                     <div class="media">
                       <div class="media-body">
-                          <h4 class="media-heading">#{comment.users.userName.substring(0, 1).toUpperCase()}#{comment.users.userName.substring(1).toLowerCase()}</h4>
+                          <h4 class="media-heading">#{comment.user.userName.substring(0, 1).toUpperCase()}#{comment.user.userName.substring(1).toLowerCase()}</h4>
                           <h:outputText value="#{comment.content}"/>
                       </div>
                     </div>      

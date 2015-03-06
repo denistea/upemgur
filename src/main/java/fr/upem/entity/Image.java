@@ -10,8 +10,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 import static javax.persistence.CascadeType.MERGE;
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REFRESH;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,7 +32,7 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i ORDER BY i.time DESC"),
-    @NamedQuery(name = "Image.findByUsers", query = "SELECT i FROM Image i WHERE i.users = :users ORDER BY i.time DESC"),
+    @NamedQuery(name = "Image.findByUsers", query = "SELECT i FROM Image i WHERE i.user = :user ORDER BY i.time DESC"),
     @NamedQuery(name = "Image.findLikeTitle", query = "SELECT i FROM Image i WHERE i.title LIKE :title ORDER BY i.time DESC"),
     @NamedQuery(name = "Image.findByTimeRange", query = "SELECT i FROM Image i WHERE i.time < :time ORDER BY i.time DESC"),
 })
@@ -46,9 +44,11 @@ public class Image implements Serializable {
     @NotNull
     @Column(unique=true, nullable = false)
     private String filename;
+    @Column(name = "file_path")
     private String path;
     private String title;
     private String description;
+    @Column(name = "posted_time")
     private Timestamp time;
     private Long dimX;
     private Long dimY;
@@ -57,7 +57,8 @@ public class Image implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="users_id", nullable = false)
-    private Users users;
+    private User user;
+    
     @CascadeOnDelete
     @OneToMany(mappedBy="image", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Comment> comments;
@@ -65,7 +66,7 @@ public class Image implements Serializable {
     public Image() {
     }
 
-    public Image(String filename, String path, String title, String description, Timestamp time, Long dimX, Long dimY, Long nbView, Users users) {
+    public Image(String filename, String path, String title, String description, Timestamp time, Long dimX, Long dimY, Long nbView, User user) {
         this.filename = filename;
         this.path = path;
         this.title = title;
@@ -74,7 +75,7 @@ public class Image implements Serializable {
         this.dimX = dimX;
         this.dimY = dimY;
         this.nbView = nbView;
-        this.users = users;
+        this.user = user;
     }
 
     public Long getId() {
@@ -149,12 +150,12 @@ public class Image implements Serializable {
         this.nbView = nbView;
     }
 
-    public Users getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Comment> getComments() {

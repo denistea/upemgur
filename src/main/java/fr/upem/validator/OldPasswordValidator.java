@@ -5,7 +5,7 @@
  */
 package fr.upem.validator;
 
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -23,7 +23,7 @@ public class OldPasswordValidator implements Validator{
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String password = (String) value;
-        Users user = (Users) FacesContext.getCurrentInstance().getExternalContext()
+        User user = (User) FacesContext.getCurrentInstance().getExternalContext()
                .getSessionMap().get("userSession");
         
         if(user == null || password.equals(user.getPassword())) {

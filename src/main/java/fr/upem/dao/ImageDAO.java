@@ -6,7 +6,7 @@
 package fr.upem.dao;
 
 import fr.upem.entity.Image;
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -32,9 +32,9 @@ public class ImageDAO extends DAO<Image>{
         return em;
     }
     
-    public List<Image> findByUsers(Users users) {
+    public List<Image> findByUsers(User user) {
         return em.createNamedQuery("Image.findByUsers", Image.class) 
-                  .setParameter("users", users) 
+                  .setParameter("user", user) 
                   .getResultList();
     }
     

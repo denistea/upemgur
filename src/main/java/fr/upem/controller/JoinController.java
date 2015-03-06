@@ -6,7 +6,7 @@
 package fr.upem.controller;
 
 import fr.upem.dao.UserDAO;
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -21,13 +21,13 @@ import javax.inject.Named;
 public class JoinController {
     @EJB
     private UserDAO userDAO;
-    private Users user;
+    private User user;
     
     public JoinController() {
-        user = new Users();
+        user = new User();
     }
 
-    public Users getUser() {
+    public User getUser() {
        return user;
     }
     

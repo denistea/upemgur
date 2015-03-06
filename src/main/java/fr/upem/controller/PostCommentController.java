@@ -8,7 +8,7 @@ package fr.upem.controller;
 import fr.upem.dao.CommentDAO;
 import fr.upem.entity.Comment;
 import fr.upem.entity.Image;
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,9 +32,9 @@ public class PostCommentController {
         comment = new Comment();
     }
     
-    public String postComment(Users users, Image image) {
+    public String postComment(User user, Image image) {
         comment.setImage(image);
-        comment.setUsers(users);
+        comment.setUser(user);
         
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();

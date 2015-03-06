@@ -5,7 +5,7 @@
  */
 package fr.upem.dao;
 
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -20,21 +20,21 @@ import javax.persistence.criteria.Root;
  * @author Denis
  */
 @Stateless
-public class UserDAO extends DAO<Users> {
+public class UserDAO extends DAO<User> {
     
     @Inject
     private EntityManager em;
     
     public UserDAO() {
-        super(Users.class);
+        super(User.class);
     }
     
     public EntityManager getEntityManager() {
         return em;
     }
     
-    public Users findByUserName(String userName) {
-        List<Users> users = em.createNamedQuery("Users.findByUserName", Users.class) 
+    public User findByUserName(String userName) {
+        List<User> users = em.createNamedQuery("User.findByUserName", User.class) 
                   .setParameter("userName", userName) 
                   .getResultList();
         
@@ -45,8 +45,8 @@ public class UserDAO extends DAO<Users> {
         return users.get(0);
     }
     
-    public Users findByEmail(String email) {
-        List<Users> users = em.createNamedQuery("Users.findByEmail", Users.class) 
+    public User findByEmail(String email) {
+        List<User> users = em.createNamedQuery("User.findByEmail", User.class) 
                   .setParameter("email", email) 
                   .getResultList();
         
@@ -57,16 +57,16 @@ public class UserDAO extends DAO<Users> {
         return users.get(0);
     }
     
-    public List<Users> findBeginUserName(String userName) {
-        return em.createNamedQuery("Users.findBeginUserName", Users.class) 
+    public List<User> findBeginUserName(String userName) {
+        return em.createNamedQuery("User.findBeginUserName", User.class) 
                   .setParameter("userName", userName+"%") 
                   .getResultList();
     }
     
-    public List<Users> findAllSortedBy(int maxResult, String...attrs) { 
+    public List<User> findAllSortedBy(int maxResult, String...attrs) { 
         CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaQuery<Users> query = builder.createQuery(Users.class);
-        Root<Users> users = query.from(Users.class);
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> users = query.from(User.class);
         query.select(users);
         
         //Users_.email

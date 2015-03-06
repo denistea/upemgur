@@ -6,7 +6,7 @@
 package fr.upem.controller;
 
 import fr.upem.dao.UserDAO;
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -23,26 +23,26 @@ public class UsersController implements Serializable {
     @EJB
     UserDAO userDAO;
     
-    public void updateUser(Users user) {
+    public void updateUser(User user) {
         user.setUserName(user.getUserName().toUpperCase());
         user.setEmail(user.getEmail().toUpperCase());
         
         userDAO.update(user);
     }
     
-    public List<Users> getAllUsers() {
+    public List<User> getAllUsers() {
         return userDAO.findAll();
     }
     
-    public void removeUser(Users user) {
+    public void removeUser(User user) {
         userDAO.delete(user);
     } 
     
-    public List<Users> searchUsers(String userName) {
+    public List<User> searchUsers(String userName) {
         return userDAO.findBeginUserName(userName);
     }
     
-    public Users getUserByUserName(String userName) {
+    public User getUserByUserName(String userName) {
         return userDAO.findByUserName(userName);
     }
     
