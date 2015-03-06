@@ -59,11 +59,11 @@ public class Users implements Serializable {
     @Column(nullable = false)
     private String password;
     
-    @OneToMany(mappedBy="users", fetch = FetchType.LAZY)
-    private List<Comment> comment;
+    @OneToMany(mappedBy="users", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Comment> comments;
     
-    @OneToMany(mappedBy="users", fetch = FetchType.LAZY)
-    private List<Image> users;
+    @OneToMany(mappedBy="users", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Image> images;
     
     public Users() {
     }
@@ -106,20 +106,20 @@ public class Users implements Serializable {
         this.password = password;
     }
 
-    public List<Comment> getComment() {
-        return comment;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setComment(List<Comment> comment) {
-        this.comment = comment;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
-    public List<Image> getUsers() {
-        return users;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setUsers(List<Image> users) {
-        this.users = users;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     @Override

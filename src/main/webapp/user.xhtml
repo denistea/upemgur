@@ -17,20 +17,22 @@
                     <div class="row">
                         <div class="col-sm-3 sidebar">
                             <ul class="nav nav-pills nav-stacked nav-sidebar">
-                                <li><h3><h:outputText value="#{userName.substring(0, 1).toUpperCase()}#{userName.substring(1).toLowerCase()}"/></h3></li>
+                                <li><h3><h:outputText value="#{param['userName'].substring(0, 1).toUpperCase()}#{param['userName'].substring(1).toLowerCase()}"/></h3></li>
                                 <li class="nav-separator"></li>
-                                <li role="presentation" class="active"><a href="user.xhtml?userName=#{userName}">Images</a></li>
-                                <li role="presentation"><a href="user-comments.xhtml?userName=#{userName}">Commentaires</a></li>
+                                <li role="presentation" class="active"><a href="user.xhtml?userName=#{param['userName']}">Images</a></li>
+                                <li role="presentation"><a href="user-comments.xhtml?userName=#{param['userName']}">Commentaires</a></li>
                             </ul>
                         </div>
                         <h:panelGroup layout="block" class="col-sm-9 content-right" id="images">
                             <div class="image-container">
-                                <ui:repeat value="#{imageController.getImagesByUser(usersController.getUserByUserName(userName))}" var="image">
+                                <c:forEach var="image" items="#{imageController.getImagesByUser(usersController.getUserByUserName(param['userName']))}">
+    
+                                <!--<ui:repeat value="#{imageController.getImagesByUser(usersController.getUserByUserName(param['userName']))}" var="image">-->
                                     <div>
-                                        <c:if test="#{userSession.userName eq userName}">
+                                        <c:if test="#{userSession.userName eq param['userName']}">
                                             <h:form>
                                                 <h:commandLink type="button" class="close close-image" action="#{imageController.removeImage(image)}" value="&times;">
-                                                    <f:param name="userName" value="#{userName}"/>
+                                                    <f:param name="userName" value="#{param['userName']}"/>
                                                     <!--<f:ajax render=":images" execute="@form" onevent="reload"/>-->
                                                 </h:commandLink>
                                             </h:form>
@@ -40,7 +42,7 @@
                                         <f:param name="img_id" value="#{image.id}"/>
                                     </h:link>
                                     </div>
-                                </ui:repeat>
+                                </c:forEach>
                             </div>
                         </h:panelGroup>
                     </div>

@@ -40,22 +40,23 @@ public class Comment implements Serializable {
     private Timestamp time;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="users_id", nullable = false)
+    @JoinColumn(name="users_id")
     private Users users;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="image_id", nullable = false)
+    @JoinColumn(name="image_id")
     private Image image;
     
     public Comment() {
     }
 
-    public Comment(Long id, String content, Timestamp time) {
-        this.id = id;
+    public Comment(String content, Timestamp time, Users users, Image image) {
         this.content = content;
         this.time = time;
+        this.users = users;
+        this.image = image;
     }
-
+    
     public Users getUsers() {
         return users;
     }

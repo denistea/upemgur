@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,33 +46,33 @@ public class Image implements Serializable {
     private String filename;
     private String path;
     private String title;
-    private String descriptioin;
+    private String description;
     private Timestamp time;
     private Long dimX;
     private Long dimY;
     @Column(name = "nb_view")
     private Long nbView;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="users_id")
     private Users users;
     
-    @OneToMany(mappedBy="image", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="image", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Comment> comments;
     
     public Image() {
     }
 
-    public Image(Long id, String filename, String path, String title, String descriptioin, Timestamp time, Long dimX, Long dimY, Long nbView) {
-        this.id = id;
+    public Image(String filename, String path, String title, String description, Timestamp time, Long dimX, Long dimY, Long nbView, Users users) {
         this.filename = filename;
+        this.path = path;
         this.title = title;
-        this.descriptioin = descriptioin;
+        this.description = description;
         this.time = time;
         this.dimX = dimX;
         this.dimY = dimY;
         this.nbView = nbView;
-        this.path = path;
+        this.users = users;
     }
 
     public Long getId() {
@@ -106,12 +107,12 @@ public class Image implements Serializable {
         this.title = title;
     }
 
-    public String getDescriptioin() {
-        return descriptioin;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescriptioin(String descriptioin) {
-        this.descriptioin = descriptioin;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Timestamp getTime() {
