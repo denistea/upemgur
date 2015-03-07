@@ -91,6 +91,8 @@ body {
 
 .panel-default {
 	background-color: #f1f4f9;
+        margin-top: 10px;
+        margin-bottom: 0;
 }
 
 .custom-title {

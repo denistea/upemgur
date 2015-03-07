@@ -36,13 +36,15 @@
                                       </c:if>
                                     <div class="media">
                                       <div class="media-left">
-                                        <a href="images/#{comment.image.filename}">
-                                            <h:graphicImage value="/images/#{comment.image.filename}" width="100px"/>
-                                        </a>
+                                        <h:link outcome="image.xhtml">
+                                            <h:graphicImage alt="#{comment.image.title}" value="/images/#{comment.image.filename}" width="100px"/>
+                                            <f:param name="img_id" value="#{comment.image.id}"/>
+                                        </h:link>
                                       </div>
                                       <div class="media-body">
-                                          <h4 class="media-heading"><h:outputText value="#{comment.image.title}"/>, <small>le <h:outputText value="#{comment.image.time}"/></small></h4>
-                                          <h:outputText value="#{comment.content}"/>
+                                          <h4 class="media-heading"><h:outputText value="#{comment.image.title}"/>, <small>le <h:outputText value="#{comment.image.time}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy à hh:mm" /></h:outputText></small></h4>
+                                            <h:outputText value="#{comment.content}"/>
                                       </div>
                                     </div>
                                   </div>

@@ -61,6 +61,7 @@
                     <ul class="nav navbar-nav">
                       <li><a href="#">Uploader une image</a></li>
                     </ul>
+                    <h:form>                            
                     <ul class="nav navbar-nav navbar-right">
                       <li><button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#uploadModal">Upload image</button></li>
                       <li class="dropdown">
@@ -68,15 +69,19 @@
                               <h:outputText value="#{userSession.userName.substring(0, 1).toUpperCase()}#{userSession.userName.substring(1).toLowerCase()}"/>
                               <span class="caret"></span>
                           </a>
-
                           <ul class="dropdown-menu" role="menu">
                             <li><a href="user.xhtml?userName=#{userSession.userName}">Mon profil</a></li>
                             <li><a href="parametres.xhtml">Paramètres</a></li>
                             <li class="divider"></li>
-                            <li><a href="">Se déconnecter</a></li>
-                          </ul>
+                            <li>
+                                <h:commandLink action="#{authController.signOut()}" value="Se déconnecter">
+                                </h:commandLink>
+                                
+                            </li>
+                          </ul>                        
                       </li>
-                    </ul>
+                    </ul> 
+                    </h:form>
                   </div>
               </c:if>
 
