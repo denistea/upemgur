@@ -25,9 +25,9 @@
         <Node id="template/user.html" x="900" y="450" zoom="true"/>
         <Node id="admin/utilisateur-liste.html" x="650" y="600" zoom="true"/>
         <Node id="admin/utilisateur-recherche.html" x="1650" y="300" zoom="true"/>
-        <Node id="commonLayout.xhtml" x="400" y="900" zoom="true"/>
         <Node id="admin/utilisateur-liste.xhtml" x="1900" y="150" zoom="true"/>
-        <Node id="user.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="commonLayout.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="user.xhtml" x="662" y="749" zoom="false"/>
         <Node id="restricted/test.xhtml" x="900" y="300" zoom="true"/>
         <Node id="template/index.html" x="150" y="750" zoom="true"/>
         <Node id="template/admin/utilisateur-liste.html" x="900" y="600" zoom="true"/>
