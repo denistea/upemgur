@@ -21,7 +21,7 @@ import javax.inject.Named;
 @SessionScoped
 public class UsersController implements Serializable {
     @EJB
-    UserDAO userDAO;
+    private UserDAO userDAO;
     
     public void updateUser(User user) {
         user.setUserName(user.getUserName().toUpperCase());

@@ -70,6 +70,12 @@ public class UserDAO extends DAO<User> {
                   .getResultList();
     }
     
+    public List<User> findBeginEmail(String email) {
+        return em.createNamedQuery("User.findBeginEmail", User.class) 
+                  .setParameter("email", email+"%") 
+                  .getResultList();
+    }
+    
     public List<User> findAllSortedBy(int maxResult, String...attrs) { 
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);

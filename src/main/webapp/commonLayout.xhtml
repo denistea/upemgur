@@ -30,8 +30,9 @@
     </h:head>
  
     <h:body>
-        <h:panelGroup id="contentWrapper">
+
         <ui:insert name="nav" >
+           <h:panelGroup id="contentWrapper">
             <nav class="navbar navbar-default">
             <div class="container">
               <!-- Brand and toggle get grouped for better mobile display -->
@@ -70,12 +71,11 @@
                               <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="user.xhtml?userName=#{userSession.userName}">Mon profil</a></li>
-                            <li><a href="restricted/parametres.xhtml">Paramètres</a></li>
+                            <li><a href="/upemgur/user.xhtml?userName=#{userSession.userName}">Mon profil</a></li>
+                            <li><a href="/upemgur/restricted/parametres.xhtml">Paramètres</a></li>
                             <li class="divider"></li>
                             <li>
                                 <h:commandLink action="#{authController.signOut()}" value="Se déconnecter">
-                                    <f:ajax render="@all" execute="@this"/>
                                 </h:commandLink>
                                 
                             </li>
@@ -108,7 +108,8 @@
                         <h:outputLabel for="SignInPassword">Mot de passe</h:outputLabel>
                         <h:inputSecret class="form-control" id="SignInPassword" value="#{authController.password}"/>
                       </div>
-                      <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authController.signIn()}"/>
+                        <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authController.signIn()}">
+                        </h:commandButton>
                     </div>
                     <div class="modal-footer">
                         <a href="#" data-dismiss ="modal" data-toggle="modal" data-target="#inscriptionModal">Pas encore inscrit ?</a>
@@ -158,7 +159,8 @@
                             <f:ajax event="blur" execute="password confirmPassword" render="m_password m_confirm" />
                         </h:inputSecret>
                       </div>
-                      <h:commandButton id="subscriptionButton" class="btn btn-primary btn-block" value="S'inscrire" action="#{joinController.join}"/>
+                        <h:commandButton id="subscriptionButton" class="btn btn-primary btn-block" value="S'inscrire" action="#{joinController.join}">
+                        </h:commandButton>
                     </h:form>
                   </div>
                   <div class="modal-footer">
@@ -200,14 +202,14 @@
                 </div>
               </div>
           </c:if>
+        </h:panelGroup>
         </ui:insert>
 
 
-            <ui:insert name="content" id="content" >
-              <div class="container content">
-              </div>
-            </ui:insert>
-        </h:panelGroup>
+        <ui:insert name="content" id="content" >
+          <div class="container content">
+          </div>
+        </ui:insert>
 	    
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/upemgur/resources/js/bootstrap.min.js"></script>
