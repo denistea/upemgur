@@ -9,7 +9,7 @@
   </h:head>
   <h:body> 
       
-    <ui:composition template="commonLayout.xhtml">
+    <ui:composition template="../commonLayout.xhtml">
         <ui:define name="content">
         <div class="container content">
           <div class="row">
@@ -42,9 +42,7 @@
                     <h:commandButton class="btn btn-primary" value="Sauvegarder" action="#{usersController.updateUser(userSession)}"/>
                 </h:form>
                 <br/>
-                <h:form>
-                    <h:commandLink value="Supprimer mon compte" action="#{usersController.removeUser(usersController.getUserByUserName(userSession.userName))}"/>   
-                </h:form>
+                <a href="#">Supprimer mon compte</a>
               </div>
           </div>
         </div>
