@@ -32,8 +32,8 @@ public class JoinController {
     }
     
     public String join() {
-        user.setUserName(user.getUserName().toUpperCase());
-        user.setEmail(user.getEmail().toUpperCase());
+        user.setUserName(user.getUserName());
+        user.setEmail(user.getEmail());
         userDAO.create(user);
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()

@@ -32,6 +32,13 @@ public class UserDAO extends DAO<User> {
     public EntityManager getEntityManager() {
         return em;
     }
+
+    @Override
+    public void create(User t) {
+        t.setUserName(t.getUserName().toLowerCase());
+        t.setEmail(t.getEmail().toLowerCase());
+        em.persist(t);
+    }
     
     public User findByUserName(String userName) {
         List<User> users = em.createNamedQuery("User.findByUserName", User.class) 

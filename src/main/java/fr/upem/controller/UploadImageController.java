@@ -5,6 +5,11 @@
  */
 package fr.upem.controller;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
 import fr.upem.dao.ImageDAO;
 import fr.upem.entity.Image;
 import fr.upem.entity.User;
@@ -18,6 +23,8 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -61,10 +68,6 @@ public class UploadImageController {
             return null;
         }
         
-        //Metadata
-        image.setDimX(new Long(bf.getWidth()));
-        image.setDimY(new Long(bf.getHeight()));
-        
         image.setNbView(0L);
         image.setUser(user);
         
@@ -81,9 +84,27 @@ public class UploadImageController {
             image.setFilename(filepath.getFileName().toString());
             image.setPath(filepath.toString());
             Files.copy(is, filepath,REPLACE_EXISTING);
+            
+            Metadata metadata = ImageMetadataReader.readMetadata(filepath.toFile());
+          
+            StringBuilder out = new StringBuilder();
+            for(Directory dir : metadata.getDirectories()) {
+                if(dir.getName().equals("Exif IFD0") || dir.getName().equals("Exif SubIFD")) {
+                    for (Tag tag : dir.getTags()) {
+                        out.append(tag.getTagName()).append(" ").append(tag.getDescription()).append("\n");
+                    }
+                }
+            }
+            
+            image.setMetadata(out.toString());
+            
         } catch (IOException ex) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.toString(), null));
+        } catch (ImageProcessingException ex) {
+            Logger.getLogger(UploadImageController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+
         imageDAO.create(image);
         return "user.xhtml?faces-redirect=true&includeViewParams=true&userName="+user.getUserName();
     }

@@ -50,8 +50,8 @@ public class Image implements Serializable {
     private String description;
     @Column(name = "posted_time")
     private Timestamp time;
-    private Long dimX;
-    private Long dimY;
+    @Column(length = 3024)   
+    private String metadata;
     @Column(name = "nb_view")
     private Long nbView;
     
@@ -66,14 +66,13 @@ public class Image implements Serializable {
     public Image() {
     }
 
-    public Image(String filename, String path, String title, String description, Timestamp time, Long dimX, Long dimY, Long nbView, User user) {
+    public Image(String filename, String path, String title, String description, Timestamp time, String metadata, Long nbView, User user) {
         this.filename = filename;
         this.path = path;
         this.title = title;
         this.description = description;
         this.time = time;
-        this.dimX = dimX;
-        this.dimY = dimY;
+        this.metadata = metadata;
         this.nbView = nbView;
         this.user = user;
     }
@@ -126,20 +125,12 @@ public class Image implements Serializable {
         this.time = time;
     }
 
-    public Long getDimX() {
-        return dimX;
+    public String getMetadata() {
+        return metadata;
     }
 
-    public void setDimX(Long dimX) {
-        this.dimX = dimX;
-    }
-
-    public Long getDimY() {
-        return dimY;
-    }
-
-    public void setDimY(Long dimY) {
-        this.dimY = dimY;
+    public void setMetadata(String metadata) {
+        this.metadata = metadata;
     }
 
     public Long getNbView() {
@@ -165,6 +156,8 @@ public class Image implements Serializable {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+    
     
     @Override
     public int hashCode() {

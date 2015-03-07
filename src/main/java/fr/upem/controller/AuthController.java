@@ -32,12 +32,12 @@ public class AuthController {
     
     public String signIn() {
         //Find User in Database
-        User userDB = userDAO.findByUserName(login.toUpperCase());
+        User userDB = userDAO.findByUserName(login);
         
         
         //Test if userName exist
         if(userDB == null) {
-            userDB = userDAO.findByEmail(login.toUpperCase());
+            userDB = userDAO.findByEmail(login);
             
             if(userDB == null) {
                 return null;
