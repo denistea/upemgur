@@ -29,8 +29,7 @@
     <![endif]-->
     
     <f:metadata>
-        <f:viewParam name="imageId" value="#{detailImageBean.imageId}" />
-        <f:event type="preRenderView" listener="#{detailImageBean.init()}" />
+        <f:viewParam name="imageId" value="#{imageId}" />
     </f:metadata>
   </h:head>
   <h:body>
@@ -60,17 +59,17 @@
               <h:form>
                 <div class="form-group">
                   <label>Image</label><br/>
-                  <img src="../images/#{detailImageBean.image.filename}" alt="#{detailImageBean.image.title}" height="200px"/>
+                  <img src="../images/#{imageController.getImageById(imageId).filename}" alt="#{imageController.getImageById(imageId).title}" height="200px"/>
                 </div>
                 <div class="form-group">
                   <h:outputLabel for="title">Titre</h:outputLabel>
-                  <h:inputText class="form-control" id="title" value="#{detailImageBean.image.title}" />
+                  <h:inputText class="form-control" id="title" value="#{imageController.getImageById(imageId).title}" />
                 </div>
                 <div class="form-group">
                   <h:outputLabel for="description">Description</h:outputLabel>
-                  <h:inputTextarea class="form-control" id="description" rows="3" value="#{detailImageBean.image.description}"/>
+                  <h:inputTextarea class="form-control" id="description" rows="3" value="#{imageController.getImageById(imageId).description}"/>
                 </div>
-                <h:commandButton class="btn btn-primary" value="Sauvegarder" action="#{imageController.updateImage(detailImageBean.image)}"/>
+                  <h:commandButton class="btn btn-primary" value="Sauvegarder" action="#{imageController.updateImage(imageController.getImageById(imageId))}"/>
               </h:form>
               <br/>
               <h:form>
