@@ -59,4 +59,8 @@ public class ImageController implements Serializable{
         }
         imageDAO.delete(image);
     }  
+    
+    public void updateImage(Image image) {
+        imageDAO.update(image);
+    }
 }
