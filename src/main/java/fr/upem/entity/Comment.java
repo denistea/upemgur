@@ -8,7 +8,7 @@ package fr.upem.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
-import static javax.persistence.CascadeType.REMOVE;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,7 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.ws.rs.DELETE;
 
 /**
  *
@@ -27,9 +26,9 @@ import javax.ws.rs.DELETE;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
-    @NamedQuery(name = "Comment.findByUsers", query = "SELECT c FROM Comment c WHERE c.users = :users ORDER BY c.time DESC"),
+    @NamedQuery(name = "Comment.findByUser", query = "SELECT c FROM Comment c WHERE c.user = :user ORDER BY c.time DESC"),
     @NamedQuery(name = "Comment.findByImage", query = "SELECT c FROM Comment c WHERE c.image = :image ORDER BY c.time DESC"),
-    @NamedQuery(name = "Comment.findByImageUsers", query = "SELECT c FROM Comment c WHERE c.users = :users AND c.image = :image ORDER BY c.time DESC"),
+    @NamedQuery(name = "Comment.findByImageUser", query = "SELECT c FROM Comment c WHERE c.user = :user AND c.image = :image ORDER BY c.time DESC"),
     @NamedQuery(name = "Comment.findByTimeRange", query = "SELECT c FROM Comment c WHERE c.time < :time ORDER BY c.time DESC")
 })
 public class Comment implements Serializable {
@@ -39,11 +38,12 @@ public class Comment implements Serializable {
     private Long id;
     private String content;
 
+    @Column(name="posted_time")
     private Timestamp time;
     
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="users_id", nullable = false)
-    private Users users;
+    private User user;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="image_id", nullable = false)
@@ -52,19 +52,19 @@ public class Comment implements Serializable {
     public Comment() {
     }
 
-    public Comment(String content, Timestamp time, Users users, Image image) {
+    public Comment(String content, Timestamp time, User user, Image image) {
         this.content = content;
         this.time = time;
-        this.users = users;
+        this.user = user;
         this.image = image;
     }
     
-    public Users getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Image getImage() {

@@ -24,11 +24,20 @@
                 <h:form>
                   <div class="form-group">
                     <h:outputLabel for="inputEmail">Email</h:outputLabel>
-                    <h:inputText class="form-control" id="inputEmail" value="#{userSession.email}"/>
+                    <h:inputText class="form-control" id="inputEmail" value="#{userSession.email}">
+                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                        <f:validator validatorId="uniqueEmailValidator" />
+                    </h:inputText>
+                    
                   </div>
                   <div class="form-group">
                     <h:outputLabel for="inputPseudo">Pseudo</h:outputLabel>
-                    <h:inputText class="form-control" id="inputPseudo" value="#{userSession.userName}"/>       
+                    <h:inputText class="form-control" id="inputPseudo" value="#{userSession.userName}">
+                        <f:validateRegex pattern="[^\W\d_]\w*" />
+                        <f:validateLength minimum="3"/>
+                        <f:validator validatorId="uniqueUserNameValidator" />
+                    </h:inputText>
+                        
                   </div>
                     <h:commandButton class="btn btn-primary" value="Sauvegarder" action="#{usersController.updateUser(userSession)}"/>
                 </h:form>

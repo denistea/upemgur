@@ -7,7 +7,7 @@ package fr.upem.controller;
 
 import fr.upem.dao.ImageDAO;
 import fr.upem.entity.Image;
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
@@ -36,7 +36,7 @@ public class ImageController implements Serializable{
         return imageDAO.findAll();
     }
     
-    public List<Image> getImagesByUser(Users user) {
+    public List<Image> getImagesByUser(User user) {
         return imageDAO.findByUsers(user);
     }
     

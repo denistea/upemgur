@@ -22,6 +22,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -32,13 +33,14 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
  * @author Denis
  */
 @Entity
+@Table(name="USERS")
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findByUserName", query = "SELECT u FROM Users u WHERE u.userName = :userName"),
-    @NamedQuery(name = "Users.findBeginUserName", query = "SELECT u FROM Users u WHERE u.userName LIKE :userName"),
-    @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.userName = :userName"),
+    @NamedQuery(name = "User.findBeginUserName", query = "SELECT u FROM User u WHERE u.userName LIKE :userName"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
 })
-public class Users implements Serializable {
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
@@ -61,16 +63,16 @@ public class Users implements Serializable {
     @Column(nullable = false)
     private String password;
     @CascadeOnDelete
-    @OneToMany(mappedBy="users", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Comment> comments;
     @CascadeOnDelete
-    @OneToMany(mappedBy="users", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Image> images;
     
-    public Users() {
+    public User() {
     }
 
-    public Users(String userName, String password, String email) {
+    public User(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -139,7 +141,7 @@ public class Users implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Users other = (Users) obj;
+        final User other = (User) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

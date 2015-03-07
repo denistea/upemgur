@@ -6,7 +6,7 @@
 package fr.upem.controller;
 
 import fr.upem.dao.UserDAO;
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -32,12 +32,12 @@ public class AuthController {
     
     public String signIn() {
         //Find User in Database
-        Users userDB = userDAO.findByUserName(login.toUpperCase());
+        User userDB = userDAO.findByUserName(login);
         
         
         //Test if userName exist
         if(userDB == null) {
-            userDB = userDAO.findByEmail(login.toUpperCase());
+            userDB = userDAO.findByEmail(login);
             
             if(userDB == null) {
                 return null;

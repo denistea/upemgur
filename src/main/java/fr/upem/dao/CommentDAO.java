@@ -7,7 +7,7 @@ package fr.upem.dao;
 
 import fr.upem.entity.Comment;
 import fr.upem.entity.Image;
-import fr.upem.entity.Users;
+import fr.upem.entity.User;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -33,9 +33,9 @@ public class CommentDAO extends DAO<Comment>{
         return em;
     }
     
-    public List<Comment> findByUsers(Users users) {
-        return em.createNamedQuery("Comment.findByUsers", Comment.class) 
-                  .setParameter("users", users) 
+    public List<Comment> findByUser(User user) {
+        return em.createNamedQuery("Comment.findByUser", Comment.class) 
+                  .setParameter("user", user) 
                   .getResultList();
     }
    
@@ -45,15 +45,15 @@ public class CommentDAO extends DAO<Comment>{
                   .getResultList();
     }
     
-    public List<Comment> findByImageUsers(Image image, Users users) {
-        return em.createNamedQuery("Comment.findByImageUsers", Comment.class) 
+    public List<Comment> findByImageUsers(Image image, User user) {
+        return em.createNamedQuery("Comment.findByImageUser", Comment.class) 
                   .setParameter("image", image)
-                  .setParameter("users", users)
+                  .setParameter("users", user)
                   .getResultList();
     }
     
     public List<Comment> findByTimeRange(Timestamp time, int max) {
-        return em.createNamedQuery("Comment.findByImageUsers", Comment.class) 
+        return em.createNamedQuery("Comment.findByTimeRange", Comment.class) 
                  .setMaxResults(max)
                  .setParameter("time", time)
                  .getResultList();
