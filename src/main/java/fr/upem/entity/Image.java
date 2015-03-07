@@ -41,22 +41,27 @@ public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @NotNull
     @Column(unique=true, nullable = false)
     private String filename;
-    @Column(name = "file_path")
+    
+    @Column(name = "FILE_PATH")
     private String path;
     private String title;
     private String description;
-    @Column(name = "posted_time")
+    
+    @Column(name = "POSTED_TIME")
     private Timestamp time;
+    
     @Column(length = 3024)   
     private String metadata;
-    @Column(name = "nb_view")
+    
+    @Column(name = "NB_VIEW")
     private Long nbView;
     
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name="users_id", nullable = false)
+    @JoinColumn(name="USERS_ID", nullable = false)
     private User user;
     
     @CascadeOnDelete

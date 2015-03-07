@@ -54,8 +54,9 @@
         <div class="col-sm-9 content-right">
             
           <h:form class="form-inline">
-            <div class="form-group">
+              
                 <h:outputLabel for="search" value="Recherche "/>
+            <div class="form-group">
                 <h:inputText class="form-control" id="search" value="#{searchUsersController.value}"/>
             </div>
             <div class="form-group">
@@ -65,9 +66,11 @@
                 <f:selectItem itemValue="email" itemLabel="email" />
               </h:selectOneMenu>
             </div>
+            <div class="form-group">
               <h:commandButton class="btn btn-default" value="Rechercher" action="#{searchUsersController.search()}">
                   <f:ajax execute="@form" render=":results"/>
               </h:commandButton>
+            </div>
           </h:form>
           
           <h:outputText value="#{searchUsersController.users.size()}"/> résultats<br/><br/>
@@ -97,9 +100,6 @@
                         </h:commandLink>
                     </h:form>
                   </td>
-                  <h:form rendered="false" id="edit">
-                      <td><h:inputText/></td>
-                  </h:form>
                 </tr>
             </ui:repeat>
           </table>

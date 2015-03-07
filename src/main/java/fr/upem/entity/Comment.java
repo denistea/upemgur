@@ -38,15 +38,15 @@ public class Comment implements Serializable {
     private Long id;
     private String content;
 
-    @Column(name="posted_time")
+    @Column(name="POSTED_TIME")
     private Timestamp time;
     
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name="users_id", nullable = false)
+    @JoinColumn(name="USERS_ID", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name="image_id", nullable = false)
+    @JoinColumn(name="IMAGE_ID", nullable = false)
     private Image image;
     
     public Comment() {

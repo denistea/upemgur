@@ -7,6 +7,7 @@ package fr.upem.entity;
 
 import static java.awt.Event.DELETE;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -63,9 +64,14 @@ public class User implements Serializable {
     @Size(min = 4)
     @Column(nullable = false)
     private String password;
+    
+    @Column(name = "JOINED_TIME")
+    private Timestamp time;
+    
     @CascadeOnDelete
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Comment> comments;
+    
     @CascadeOnDelete
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Image> images;
