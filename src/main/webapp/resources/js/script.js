@@ -13,16 +13,21 @@ $(document).ready(function(){
     //$("#inputPassword").blur(checkPassword());
     $("#subscriptionForm\\:inputPassword").keyup(checkPassword);
     $("#subscriptionForm\\:confirmPassword").keyup(checkPassword);
+    $("#subscriptionForm\\:subscriptionButton").click(checkInscription);
+    
+    $("#uploadForm\\:uploadButton").click(checkUpload);
 });
 
 function checkEmail() {
     if(validEmail($("#subscriptionForm\\:inputEmail").val())) {
         $("#subscriptionForm\\:inputEmail").parent().removeClass("has-error");
         //$("#badEmail").addClass("sr-only");
+        return true;
     }
     else {
         $("#subscriptionForm\\:inputEmail").parent().addClass("has-error");
         //$("#badEmail").removeClass("sr-only");
+        return false;
     }
 }
 
@@ -32,10 +37,12 @@ function checkLogin() {
             && (re.test($("#subscriptionForm\\:inputLogin").val()) )) {
         $("#subscriptionForm\\:inputLogin").parent().removeClass("has-error");
         //$("#badLogin").addClass("sr-only");
+        return true;
     }
     else {
         $("#subscriptionForm\\:inputLogin").parent().addClass("has-error");
         //$("#badLogin").removeClass("sr-only");
+        return false;
     }
 }
 
@@ -44,16 +51,33 @@ function checkPassword() {
             &&($("#subscriptionForm\\:inputPassword").val().length >= 4)) {
         $("#subscriptionForm\\:inputPassword").parent().removeClass("has-error");
         $("#subscriptionForm\\:confirmPassword").parent().removeClass("has-error");
+        return true;
     }
     else {
         $("#subscriptionForm\\:inputPassword").parent().addClass("has-error");
         $("#subscriptionForm\\:confirmPassword").parent().addClass("has-error");
+        return false;
     }
 }
 
-function checkInscription() {
-    var validForm = false;
+function checkUpload() {
+    var validForm = true;
+    
+    $("#uploadForm\\:inputTitle").parent().removeClass("has-error");
+    
+    if(!$("#uploadForm\\:inputImage").val()) {
+        validForm = false;
+    }
+    if(!$("#uploadForm\\:inputTitle").val()) {
+        $("#uploadForm\\:inputTitle").parent().addClass("has-error")
+        validForm = false;
+    }
+    
+    return validForm;
+}
 
+function checkInscription() {
+    return (checkEmail() && checkLogin() && checkPassword());
 }
 
 function validEmail(email) { 
