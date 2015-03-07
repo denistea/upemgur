@@ -87,6 +87,7 @@ body {
 .content {
 	background-color: white;
 	padding-bottom: 30px;
+        /*min-height: 350px;*/
 }
 
 .panel-default {
