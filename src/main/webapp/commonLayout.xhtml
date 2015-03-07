@@ -75,7 +75,7 @@
                             <li class="divider"></li>
                             <li>
                                 <h:commandLink action="#{authController.signOut()}" value="Se déconnecter">
-                                    <f:ajax render="@all" execute="@form"/>
+                                    <f:ajax render="@all" execute="@this"/>
                                 </h:commandLink>
                                 
                             </li>
