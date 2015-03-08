@@ -2,10 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
   <h:head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -30,9 +30,8 @@
     <![endif]-->
     
     <f:metadata>
-        <f:viewAction action="#{searchImageController.search()}"/>
+        <f:viewAction action="#{searchCommentController.search()}"/>
     </f:metadata> 
-    
   </h:head>
   <h:body>
       
@@ -52,55 +51,55 @@
         <div class="col-sm-3 sidebar">
           <ul class="nav nav-pills nav-stacked nav-sidebar">
             <li role="presentation"><a href="user.xhtml"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Utilisateurs</a></li>
-            <li role="presentation" class="active"><a href="image.xhtml"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Images</a></li>
-            <li role="presentation"><a href="comment.xhtml"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Commentaires</a></li>
+            <li role="presentation"><a href="image.xhtml"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Images</a></li>
+            <li role="presentation" class="active"><a href="comment.xhtml"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Commentaires</a></li>
           </ul>
         </div>
         <div class="col-sm-9 content-right">
+            
           <h:form class="form-inline">
-            <h2 class="custom-title">Images</h2>
+            <h2 class="custom-title">Commentaires</h2>
             <div class="form-group">
               <label for="search">Recherche&nbsp;</label>
-              <h:inputText class="form-control" id="search" value="#{searchImageController.value}"/>
+              <h:inputText class="form-control" id="search" value="#{searchCommentController.value}"/>
             </div>
             <div class="form-group">
               <label for="searchSelect">&nbsp;par&nbsp;</label>
-              <h:selectOneMenu id="searchSelect" class="form-control" value="#{searchImageController.criteria}">
-                <f:selectItem itemValue="all" itemLabel="tout afficher"/>
-                <f:selectItem itemValue="title" itemLabel="title"/>
-                <f:selectItem itemValue="description" itemLabel="description"/>
+              <h:selectOneMenu id="searchSelect" class="form-control" value="#{searchCommentController.criteria}">
+                <f:selectItem itemValue="all" itemLabel="tout afficher" />
+                <f:selectItem itemValue="content" itemLabel="content" />
               </h:selectOneMenu>
             </div>
             <div class="form-group">
-                <h:commandButton class="btn btn-default" value="Rechercher" action="#{searchImageController.search()}"/>
+                <h:commandButton class="btn btn-default" value="Rechercher" action="#{searchCommentController.search()}">
+                  <f:ajax execute="@form" render=":results"/>
+              </h:commandButton>
             </div>
           </h:form>
-            <br/><h:outputText value="#{searchImageController.images.size()}"/> résultats<br/><br/>
+          
+            <br/><h:outputText value="#{searchCommentController.comments.size()}"/> résultats<br/><br/>
+          <h:panelGroup id="results">
           <table class="table table-striped">
             <tr>
               <th>id</th>
-              <th>title</th>
-              <th>description</th>
+              <th>content</th>
               <th>date</th>
               <th>action</th>
             </tr>
-              <ui:repeat value="#{searchImageController.images}" var="image">
+
+            <ui:repeat value="#{searchCommentController.comments}" var="comment">
                 <tr>
-                  <td>#{image.id}</td>
-                  <td>#{image.title}</td>
-                  <td>#{image.description}</td>
+                  <td>#{comment.id}</td>
+                  <td>#{comment.content}</td>
                   <td>
-                    <h:outputText value="#{image.time}">
+                      <h:outputText value="#{comment.time}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
                   </td>
                   <td>
                     <h:form>
-                        <h:link class="clickable glyphicon glyphicon-pencil" value="" outcome="image-edit.xhtml" >
-                            <f:param name="imageId" value="#{image.id}" />
-                        </h:link>
-                        <h:commandLink class="clickable glyphicon glyphicon-remove" p:aria-hidden="true" action="#{searchImageController.search()}">
-                            <f:actionListener binding="#{imageController.removeImage(image)}" />
+                        <h:commandLink class="clickable glyphicon glyphicon-remove" p:aria-hidden="true" action="#{searchCommentController.search()}">
+                            <f:actionListener binding="#{commentController.removeComment(comment)}" />
                             <f:ajax render="@all" execute="@this"/>
                         </h:commandLink>
                     </h:form>
@@ -108,6 +107,7 @@
                 </tr>
             </ui:repeat>
           </table>
+          </h:panelGroup>
         </div>
       </div>
     </div>

@@ -52,6 +52,12 @@ public class CommentDAO extends DAO<Comment>{
                   .getResultList();
     }
     
+    public List<Comment> findLikeContent(String content) {
+        return em.createNamedQuery("Comment.findLikeContent", Comment.class)
+                 .setParameter("content", "%"+content+"%")
+                 .getResultList();
+    }
+    
     public List<Comment> findByTimeRange(Timestamp time, int max) {
         return em.createNamedQuery("Comment.findByTimeRange", Comment.class) 
                  .setMaxResults(max)

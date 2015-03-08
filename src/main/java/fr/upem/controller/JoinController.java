@@ -7,6 +7,9 @@ package fr.upem.controller;
 
 import fr.upem.dao.UserDAO;
 import fr.upem.entity.User;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -34,6 +37,9 @@ public class JoinController {
     public String join() {
         user.setUserName(user.getUserName());
         user.setEmail(user.getEmail());
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        user.setTime(new Timestamp(now.getTime()));
         userDAO.create(user);
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()

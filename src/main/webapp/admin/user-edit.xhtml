@@ -30,8 +30,8 @@
     <![endif]-->
     
     <f:metadata>
-      <f:viewParam name="imageId" value="#{detailImageBean.imageId}"/>
-      <f:viewAction action="#{detailImageBean.init()}"/>
+        <f:viewParam name="userId" value="#{userBean.userId}"/>
+        <f:viewAction action="#{userBean.init()}"/>
     </f:metadata>  
   </h:head>
   <h:body>
@@ -51,28 +51,24 @@
       <div class="row">
         <div class="col-sm-3 sidebar">
           <ul class="nav nav-pills nav-stacked nav-sidebar">
-            <li role="presentation"><a href="user.xhtml"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Utilisateurs</a></li>
-            <li role="presentation" class="active"><a href="image.xhtml"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Images</a></li>
+            <li role="presentation" class="active"><a href="user.xhtml"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Utilisateurs</a></li>
+            <li role="presentation"><a href="image.xhtml"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Images</a></li>
             <li role="presentation"><a href="comment.xhtml"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Commentaires</a></li>
           </ul>
         </div>
             <div class="col-sm-5 content-right">
-              <h2 class="custom-title">Editer l'image</h2>
+              <h2 class="custom-title">Editer l'utilisateur</h2>
               <h:form>
                 <div class="form-group">
-                  <label>Image</label><br/>
-                  <img src="../images/#{detailImageBean.image.filename}" alt="#{detailImageBean.image.title}" height="200px"/>
+                  <h:outputLabel for="pseudo">Pseudo</h:outputLabel>
+                  <h:inputText class="form-control" id="pseudo" value="#{userBean.user.userName}" />
                 </div>
                 <div class="form-group">
-                  <h:outputLabel for="title">Titre</h:outputLabel>
-                  <h:inputText class="form-control" id="title" value="#{detailImageBean.image.title}" />
+                  <h:outputLabel for="email">Email</h:outputLabel>
+                  <h:inputText class="form-control" id="email" value="#{userBean.user.email}" />
                 </div>
-                <div class="form-group">
-                  <h:outputLabel for="description">Description</h:outputLabel>
-                  <h:inputTextarea class="form-control" id="description" rows="3" value="#{detailImageBean.image.description}"/>
-                </div>
-                  <h:commandButton class="btn btn-primary" value="Sauvegarder" action="#{imageController.updateImage(detailImageBean.image)}">
-                  </h:commandButton>
+                <h:commandButton class="btn btn-primary" value="Sauvegarder" action="#{usersController.updateUser(userBean.user)}">
+                </h:commandButton>
               </h:form>
             </div>
       </div>

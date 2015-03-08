@@ -29,7 +29,9 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "Comment.findByUser", query = "SELECT c FROM Comment c WHERE c.user = :user ORDER BY c.time DESC"),
     @NamedQuery(name = "Comment.findByImage", query = "SELECT c FROM Comment c WHERE c.image = :image ORDER BY c.time DESC"),
     @NamedQuery(name = "Comment.findByImageUser", query = "SELECT c FROM Comment c WHERE c.user = :user AND c.image = :image ORDER BY c.time DESC"),
-    @NamedQuery(name = "Comment.findByTimeRange", query = "SELECT c FROM Comment c WHERE c.time < :time ORDER BY c.time DESC")
+    @NamedQuery(name = "Comment.findByTimeRange", query = "SELECT c FROM Comment c WHERE c.time < :time ORDER BY c.time DESC"),
+    @NamedQuery(name = "Comment.findLikeContent", query = "SELECT c FROM Comment c WHERE UPPER(c.content) LIKE UPPER(:content) ORDER BY c.time DESC")
+        
 })
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;

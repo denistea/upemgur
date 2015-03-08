@@ -7,45 +7,44 @@ package fr.upem.controller;
 
 import fr.upem.dao.UserDAO;
 import fr.upem.entity.User;
+import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
  *
- * @author Denis
+ * @author Miguel
  */
 @Named("userBean")
-@RequestScoped
-public class UserBean {
-    
+@SessionScoped
+public class UserBean implements Serializable {
     @EJB
     private UserDAO userDAO;
-    private Long userId;
+    
     private User user;
+    private Long userId;
     
     public UserBean() {
         user = new User();
     }
-    
     public void init() {
         user = userDAO.find(userId);
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public User getUser() {
         return user;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
-    
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

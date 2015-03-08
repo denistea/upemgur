@@ -28,6 +28,10 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <f:metadata>
+        <f:viewAction action="#{searchUsersController.search()}"/>
+    </f:metadata> 
   </h:head>
   <h:body>
       
@@ -46,33 +50,36 @@
       <div class="row">
         <div class="col-sm-3 sidebar">
           <ul class="nav nav-pills nav-stacked nav-sidebar">
-            <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Utilisateurs</a></li>
-            <li role="presentation"><a href="#"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Images</a></li>
-            <li role="presentation"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Commentaires</a></li>
+            <li role="presentation" class="active"><a href="user.xhtml"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Utilisateurs</a></li>
+            <li role="presentation"><a href="image.xhtml"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Images</a></li>
+            <li role="presentation"><a href="comment.xhtml"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Commentaires</a></li>
           </ul>
         </div>
-          <h:panelGroup layout="block" class="col-sm-9 content-right" id="searchcontent">
+        <div class="col-sm-9 content-right">
             
           <h:form class="form-inline">
-              
-                <h:outputLabel for="search" value="Recherche "/>
+            <h2 class="custom-title">Utilisateurs</h2>
             <div class="form-group">
-                <h:inputText class="form-control" id="search" value="#{searchUsersController.value}"/>
+              <label for="search">Recherche&nbsp;</label>
+              <h:inputText class="form-control" id="search" value="#{searchUsersController.value}"/>
             </div>
             <div class="form-group">
+              <label for="searchSelect">&nbsp;par&nbsp;</label>
               <h:selectOneMenu id="searchSelect" class="form-control" value="#{searchUsersController.criteria}">
-                <f:selectItem itemValue="all" itemLabel="all" />
+                <f:selectItem itemValue="all" itemLabel="tout afficher" />
                 <f:selectItem itemValue="userName" itemLabel="pseudo" />
                 <f:selectItem itemValue="email" itemLabel="email" />
               </h:selectOneMenu>
             </div>
             <div class="form-group">
               <h:commandButton class="btn btn-default" value="Rechercher" action="#{searchUsersController.search()}">
+                  <f:ajax execute="@form" render=":results"/>
               </h:commandButton>
             </div>
           </h:form>
           
-          <h:outputText value="#{searchUsersController.users.size()}"/> résultats<br/><br/>
+          <br/><h:outputText value="#{searchUsersController.users.size()}"/> résultats<br/><br/>
+          <h:panelGroup id="results">
           <table class="table table-striped">
             <tr>
               <th>id</th>
@@ -81,42 +88,33 @@
               <th>date</th>
               <th>action</th>
             </tr>
-              <h:panelGroup id="results"/>
+
             <ui:repeat value="#{searchUsersController.users}" var="user">
-                <h:form>
                 <tr>
-
+                  <td>#{user.id}</td>
+                  <td>#{user.userName}</td>
+                  <td>#{user.email}</td>
                   <td>
-                      <h:outputText value="#{user.id}"/>
+                    <h:outputText value="#{user.time}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
                   </td>
                   <td>
-                      <h:outputText value="#{user.userName}" rendered="#{not user.edit}"/>
-                      <h:inputText value="#{user.userName}" rendered="#{user.edit}"/> 
-                  </td>
-                  <td>
-                      <h:outputText value="#{user.email}" rendered="#{not user.edit}"/>
-                      <h:inputText value="#{user.email}" rendered="#{user.edit}"/> 
-                  </td>
-                  <td>
-                      <h:outputText value="#{user.time}"/>
-                  </td>
-                  <td>
-                    <h:commandLink class="clickable glyphicon glyphicon-pencil" p:aria-hidden="true" action="#{usersController.updateUser(user)}" rendered="#{user.edit}">
-
-                    </h:commandLink>
-                    <h:commandLink class="clickable glyphicon glyphicon-pencil" p:aria-hidden="true" action="#{searchUsersController.editAction(user)}" rendered="#{not user.edit}">
-                        
-                    </h:commandLink>
-                    <h:commandLink class="clickable glyphicon glyphicon-remove" p:aria-hidden="true" action="#{usersController.removeUser(user)}">
-                        
-                    </h:commandLink>
+                    <h:form>
+                        <h:link class="clickable glyphicon glyphicon-pencil" value="" outcome="user-edit.xhtml" >
+                            <f:param name="userId" value="#{user.id}" />
+                        </h:link>
+                        <h:commandLink class="clickable glyphicon glyphicon-remove" p:aria-hidden="true" action="#{searchUsersController.search()}">
+                            <f:actionListener binding="#{usersController.removeUser(user)}" />
+                            <f:ajax render="@all" execute="@this"/>
+                        </h:commandLink>
+                    </h:form>
                   </td>
                 </tr>
-                </h:form>
             </ui:repeat>
-              <h:panelGroup/>
           </table>
-        </h:panelGroup>
+          </h:panelGroup>
+        </div>
       </div>
     </div>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

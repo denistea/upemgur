@@ -5,54 +5,48 @@
  */
 package fr.upem.controller;
 
-import fr.upem.dao.UserDAO;
-import fr.upem.entity.User;
+import fr.upem.dao.ImageDAO;
+import fr.upem.entity.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
  *
- * @author Denis
+ * @author Miguel
  */
-@Named("searchUsersController")
+@Named("searchImageController")
 @SessionScoped
-public class SearchUsersController implements Serializable {
-    @EJB
-    private UserDAO userDAO;
+public class SearchImageController implements Serializable {
     
-    private List<User> users;
+    @EJB
+    private ImageDAO imageDAO;
+    
+    private List<Image> images;
     private String criteria;
     private String value;
     
-    public SearchUsersController() {
-        users = new ArrayList<>();
+    public SearchImageController() {
+        images = new ArrayList<>();
         criteria = "all";
     }
     
     public void search() {
         switch(criteria) {
-            case "email":
-                users = userDAO.findBeginEmail(value);
-                break;
-            case "userName":
-                users = userDAO.findBeginUserName(value);
-                break;
             case "all":
-                users = userDAO.findAll();
+                images = imageDAO.findAll();
+                break;
+            case "title":
+                images = imageDAO.findLikeTitle(value);
+                break;
+            case "description":
+                images = imageDAO.findLikeDescription(value);
                 break;
         }
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 
     public String getCriteria() {
@@ -63,6 +57,14 @@ public class SearchUsersController implements Serializable {
         this.criteria = criteria;
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
     public String getValue() {
         return value;
     }
@@ -70,14 +72,5 @@ public class SearchUsersController implements Serializable {
     public void setValue(String value) {
         this.value = value;
     }
-    
-    public String editAction(User user) {
-        /*for(User u : users) {
-            u.setEdit(false);
-        }*/
-        user.setEdit(true);
-        return null;
-    }
-    
     
 }

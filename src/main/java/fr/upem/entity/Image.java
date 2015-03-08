@@ -33,8 +33,10 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 @NamedQueries({
     @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i ORDER BY i.time DESC"),
     @NamedQuery(name = "Image.findByUsers", query = "SELECT i FROM Image i WHERE i.user = :user ORDER BY i.time DESC"),
-    @NamedQuery(name = "Image.findLikeTitle", query = "SELECT i FROM Image i WHERE i.title LIKE :title ORDER BY i.time DESC"),
+    @NamedQuery(name = "Image.findLikeTitle", query = "SELECT i FROM Image i WHERE UPPER(i.title) LIKE UPPER(:title) ORDER BY i.time DESC"),
+    @NamedQuery(name = "Image.findLikeDescription", query = "SELECT i FROM Image i WHERE UPPER(i.description) LIKE UPPER(:description) ORDER BY i.time DESC"),
     @NamedQuery(name = "Image.findByTimeRange", query = "SELECT i FROM Image i WHERE i.time < :time ORDER BY i.time DESC"),
+    @NamedQuery(name = "Image.findById", query = "SELECT i FROM Image i WHERE i.id = :id ORDER BY i.id DESC"),
 })
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;
