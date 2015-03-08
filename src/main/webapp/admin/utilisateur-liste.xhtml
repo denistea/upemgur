@@ -51,7 +51,7 @@
             <li role="presentation"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Commentaires</a></li>
           </ul>
         </div>
-        <div class="col-sm-9 content-right">
+          <h:panelGroup layout="block" class="col-sm-9 content-right" id="searchcontent">
             
           <h:form class="form-inline">
               
@@ -68,13 +68,11 @@
             </div>
             <div class="form-group">
               <h:commandButton class="btn btn-default" value="Rechercher" action="#{searchUsersController.search()}">
-                  <f:ajax execute="@form" render=":results"/>
               </h:commandButton>
             </div>
           </h:form>
           
           <h:outputText value="#{searchUsersController.users.size()}"/> résultats<br/><br/>
-          <h:panelGroup id="results">
           <table class="table table-striped">
             <tr>
               <th>id</th>
@@ -83,28 +81,42 @@
               <th>date</th>
               <th>action</th>
             </tr>
-
+              <h:panelGroup id="results"/>
             <ui:repeat value="#{searchUsersController.users}" var="user">
+                <h:form>
                 <tr>
-                  <td>#{user.id}</td>
-                  <td>#{user.userName}</td>
-                  <td>#{user.email}</td>
-                  <td>01/01/2015</td>
+
                   <td>
-                    <h:form>
-                        <h:commandLink class="clickable glyphicon glyphicon-pencil" p:aria-hidden="true">
-                            <f:ajax render="@all edit" execute="@this"/>
-                        </h:commandLink>
-                        <h:commandLink class="clickable glyphicon glyphicon-remove" p:aria-hidden="true" action="#{usersController.removeUser(user)}">
-                            <f:ajax render="@all" execute="@this"/>
-                        </h:commandLink>
-                    </h:form>
+                      <h:outputText value="#{user.id}"/>
+                  </td>
+                  <td>
+                      <h:outputText value="#{user.userName}" rendered="#{not user.edit}"/>
+                      <h:inputText value="#{user.userName}" rendered="#{user.edit}"/> 
+                  </td>
+                  <td>
+                      <h:outputText value="#{user.email}" rendered="#{not user.edit}"/>
+                      <h:inputText value="#{user.email}" rendered="#{user.edit}"/> 
+                  </td>
+                  <td>
+                      <h:outputText value="#{user.time}"/>
+                  </td>
+                  <td>
+                    <h:commandLink class="clickable glyphicon glyphicon-pencil" p:aria-hidden="true" action="#{usersController.updateUser(user)}" rendered="#{user.edit}">
+
+                    </h:commandLink>
+                    <h:commandLink class="clickable glyphicon glyphicon-pencil" p:aria-hidden="true" action="#{searchUsersController.editAction(user)}" rendered="#{not user.edit}">
+                        
+                    </h:commandLink>
+                    <h:commandLink class="clickable glyphicon glyphicon-remove" p:aria-hidden="true" action="#{usersController.removeUser(user)}">
+                        
+                    </h:commandLink>
                   </td>
                 </tr>
+                </h:form>
             </ui:repeat>
+              <h:panelGroup/>
           </table>
-          </h:panelGroup>
-        </div>
+        </h:panelGroup>
       </div>
     </div>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

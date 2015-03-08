@@ -24,6 +24,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -76,7 +77,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Image> images;
     
+    @Transient
+    private boolean edit;
+    
     public User() {
+        edit = false;
     }
 
     public User(String userName, String password, String email) {
@@ -131,6 +136,22 @@ public class User implements Serializable {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
+    public boolean isEdit() {
+        return edit;
+    }
+
+    public void setEdit(boolean edit) {
+        this.edit = edit;
     }
 
     @Override

@@ -23,11 +23,15 @@ public class UsersController implements Serializable {
     @EJB
     private UserDAO userDAO;
     
+    private User user;
+    
+    public UsersController() {
+        user = new User();
+    }
+    
     public void updateUser(User user) {
-        user.setUserName(user.getUserName().toUpperCase());
-        user.setEmail(user.getEmail().toUpperCase());
-        
         userDAO.update(user);
+        user.setEdit(false);
     }
     
     public List<User> getAllUsers() {
@@ -45,5 +49,14 @@ public class UsersController implements Serializable {
     public User getUserByUserName(String userName) {
         return userDAO.findByUserName(userName);
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     
 }

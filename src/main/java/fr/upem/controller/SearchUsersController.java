@@ -70,5 +70,13 @@ public class SearchUsersController implements Serializable {
         this.value = value;
     }
     
+    public String editAction(User user) {
+        /*for(User u : users) {
+            u.setEdit(false);
+        }*/
+        user.setEdit(true);
+        return null;
+    }
+    
     
 }
