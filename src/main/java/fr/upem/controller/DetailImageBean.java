@@ -7,8 +7,12 @@ package fr.upem.controller;
 
 import fr.upem.dao.ImageDAO;
 import fr.upem.entity.Image;
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -16,18 +20,19 @@ import javax.inject.Named;
  * @author Denis
  */
 @Named("detailImageBean")
-@RequestScoped
-public class DetailImageBean {
+@SessionScoped
+public class DetailImageBean implements Serializable{
     @EJB
     private ImageDAO imageDAO;
     
     private Image image;
     private Long imageId;
     
+    public DetailImageBean() {
+        image = new Image();
+    }
+    
     public void init() {
-        if (imageId == null) {
-            return;
-        }
         image = imageDAO.find(imageId);
     }
     
@@ -43,4 +48,12 @@ public class DetailImageBean {
         this.imageId = imageId;
     }
 
+    public void setImage(Image image) {
+        this.image = image;
+    }
+    
+    public void update() {
+        imageDAO.find(image.getId());
+        imageDAO.update(image);
+    }
 }

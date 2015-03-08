@@ -8,7 +8,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
   <f:metadata>
       <f:viewParam name="img_id" value="#{detailImageBean.imageId}" />
-      <f:event type="preRenderView" listener="#{detailImageBean.init()}" />
+      <f:viewAction action="#{detailImageBean.init()}" />
   </f:metadata>
   <h:head>
   </h:head>

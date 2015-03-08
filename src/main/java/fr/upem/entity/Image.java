@@ -161,8 +161,6 @@ public class Image implements Serializable {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
-
-    
     
     @Override
     public int hashCode() {
