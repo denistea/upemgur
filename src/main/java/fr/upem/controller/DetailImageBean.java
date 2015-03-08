@@ -51,9 +51,4 @@ public class DetailImageBean implements Serializable{
     public void setImage(Image image) {
         this.image = image;
     }
-    
-    public void update() {
-        imageDAO.find(image.getId());
-        imageDAO.update(image);
-    }
 }
