@@ -31,7 +31,6 @@ public class UsersController implements Serializable {
     
     public void updateUser(User user) {
         userDAO.update(user);
-        user.setEdit(false);
     }
     
     public List<User> getAllUsers() {

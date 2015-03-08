@@ -31,13 +31,13 @@
           <h:form class="admin-index">
             <h1>Administration</h1>
             <div class="form-group">
-              <h:inputText class="form-control" id="login" value="" p:placeholder="Login"/>
+                <h:inputText class="form-control" id="login" value="#{authController.login}" p:placeholder="Login"/>
             </div>
             <div class="form-group">
-              <h:inputText class="form-control" id="password" value="" p:placeholder="Mot de passe"/>
+                <h:inputText class="form-control" id="password" value="#{authController.password}" p:placeholder="Mot de passe"/>
             </div>
-            <h:commandButton class="btn btn-primary btn-block" value="Se connecter" />       
-            <br/><a href="../index.xhtml">Revenir au site principal</a>
+            <h:commandButton class="btn btn-primary btn-block" value="Se connecter" action="#{authController.signIn()}" />       
+            <br/><a href="/upemgur/index.xhtml">Revenir au site principal</a>
           </h:form>
         </div>
         <!-- Include all compiled plugins (below), or include individual files as needed -->

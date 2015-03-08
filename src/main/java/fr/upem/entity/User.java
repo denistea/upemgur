@@ -69,6 +69,8 @@ public class User implements Serializable {
     @Column(name = "JOINED_TIME")
     private Timestamp time;
     
+    private boolean isAdmin;
+    
     @CascadeOnDelete
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Comment> comments;
@@ -77,17 +79,16 @@ public class User implements Serializable {
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Image> images;
     
-    @Transient
-    private boolean edit;
-    
     public User() {
-        edit = false;
+        isAdmin = false;
     }
 
-    public User(String userName, String password, String email) {
+    public User(String userName, String password, String email, Timestamp time, boolean isAdmin) {
         this.userName = userName;
         this.password = password;
         this.email = email;
+        this.time = time;
+        this.isAdmin = isAdmin;
     }    
 
     public Long getId() {
@@ -146,12 +147,12 @@ public class User implements Serializable {
         this.time = time;
     }
 
-    public boolean isEdit() {
-        return edit;
+    public boolean isIsAdmin() {
+        return isAdmin;
     }
 
-    public void setEdit(boolean edit) {
-        this.edit = edit;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @Override
