@@ -5,8 +5,8 @@
  */
 package fr.upem.controller;
 
-import fr.upem.dao.UserDAO;
-import fr.upem.entity.User;
+import fr.upem.dao.CommentDAO;
+import fr.upem.entity.Comment;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,58 +18,55 @@ import javax.inject.Named;
  *
  * @author Denis
  */
-@Named("searchUsersController")
+@Named("searchCommentController")
 @SessionScoped
-public class SearchUsersController implements Serializable {
+public class SearchCommentController implements Serializable {
     @EJB
-    private UserDAO userDAO;
+    private CommentDAO commentDAO;
     
-    private List<User> users;
+    private List<Comment> comments;
     private String criteria;
     private String value;
     
-    public SearchUsersController() {
-        users = new ArrayList<>();
+    public SearchCommentController() {
+        comments = new ArrayList<>();
         criteria = "all";
     }
     
     public void search() {
         switch(criteria) {
-            case "email":
-                users = userDAO.findBeginEmail(value);
+            case "content":
+                comments = commentDAO.findLikeContent(value);
                 break;
-            case "userName":
-                users = userDAO.findBeginUserName(value);
-                break;
+            
             case "all":
-                users = userDAO.findAll();
+                comments = commentDAO.findAll();
                 break;
         }
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public List<Comment> getComments() {
+        return comments;
     }
 
     public String getCriteria() {
         return criteria;
     }
 
-    public void setCriteria(String criteria) {
-        this.criteria = criteria;
-    }
-
     public String getValue() {
         return value;
     }
 
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void setCriteria(String criteria) {
+        this.criteria = criteria;
+    }
+
     public void setValue(String value) {
         this.value = value;
-    }
-    
+    }    
     
 }

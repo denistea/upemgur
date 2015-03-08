@@ -44,10 +44,22 @@ public class ImageDAO extends DAO<Image>{
                  .getResultList();
     }
     
+    public List<Image> findLikeDescription(String description) {
+        return em.createNamedQuery("Image.findLikeDescription", Image.class)
+                 .setParameter("description", "%"+description+"%")
+                 .getResultList();
+    }
+    
     public List<Image> findByTimeRange(Timestamp time, int max) {
         return em.createNamedQuery("Image.findByTimeRange", Image.class)
                  .setMaxResults(max)
                  .setParameter("time", time)
+                 .getResultList();           
+    }
+    
+    public List<Image> findById(Long id) {
+        return em.createNamedQuery("Image.findById", Image.class)
+                 .setParameter("id", id)
                  .getResultList();           
     }
     
