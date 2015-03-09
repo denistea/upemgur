@@ -29,6 +29,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
+import org.eclipse.persistence.annotations.PrivateOwned;
 
 /**
  *
@@ -70,13 +71,14 @@ public class User implements Serializable {
     private Timestamp time;
     
     private boolean isAdmin;
-    
+
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE,REMOVE})
     @CascadeOnDelete
-    @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Comment> comments;
     
+
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE,REMOVE})
     @CascadeOnDelete
-    @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Image> images;
     
     public User() {
