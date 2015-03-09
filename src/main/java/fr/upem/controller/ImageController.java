@@ -61,7 +61,6 @@ public class ImageController implements Serializable{
     }  
     
     public void updateImage(Image image) {
-        imageDAO.find(image.getId());
         imageDAO.update(image);
     }
 }

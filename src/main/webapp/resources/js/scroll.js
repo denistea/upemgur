@@ -3,15 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function(){ // Quand le document est complètement chargé
-
-      var load = false; // aucun chargement de commentaire n'est en cours
-
-      $(window).scroll(function(){ // On surveille l'évènement scroll
-              /* Si l'élément offset est en bas de scroll, si aucun chargement 
-              n'est en cours, si le nombre de commentaire affiché est supérieur 
-              à 5 et si tout les commentaires ne sont pas affichés, alors on 
-              lance la fonction. */
+$(document).ready(function(){ 
+    
+      var load = false; 
+      $(window).scroll(function(){ 
               console.log($(document).height() - $(window).height() - 10);
               console.log($(window).scrollTop());
               if(($(document).height() - $(window).height() - 220) <= $(window).scrollTop()
@@ -34,6 +29,16 @@ $(document).ready(function(){ // Quand le document est complètement chargé
                 
                 $(".image-container").justifiedGallery('norewind');
               }
-
-      });
+        });
+        /*
+        <a class="image" id="2" href="image.xhtml?img_id=2">
+           <img alt="l" src="/upemgur/images/5432167835001264671.jpg" />
+        </a>
+    
+        {
+        "images" : [{"id": 1, "title":"test","filename": "13e5d446.jpg"},
+                    {"id": 1, "title":"test","filename": "13e5d446.jpg"},
+                    {"id": 1, "title":"test","filename": "13e5d446.jpg"}]
+        }
+        */
 });

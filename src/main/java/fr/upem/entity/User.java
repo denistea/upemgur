@@ -24,6 +24,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -68,6 +69,8 @@ public class User implements Serializable {
     @Column(name = "JOINED_TIME")
     private Timestamp time;
     
+    private boolean isAdmin;
+    
     @CascadeOnDelete
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY, orphanRemoval = true, cascade = {REMOVE,MERGE})
     private List<Comment> comments;
@@ -77,12 +80,15 @@ public class User implements Serializable {
     private List<Image> images;
     
     public User() {
+        isAdmin = false;
     }
 
-    public User(String userName, String password, String email) {
+    public User(String userName, String password, String email, Timestamp time, boolean isAdmin) {
         this.userName = userName;
         this.password = password;
         this.email = email;
+        this.time = time;
+        this.isAdmin = isAdmin;
     }    
 
     public Long getId() {
@@ -139,6 +145,14 @@ public class User implements Serializable {
 
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @Override

@@ -41,6 +41,7 @@ public class JoinController {
         Date now = calendar.getTime();
         user.setTime(new Timestamp(now.getTime()));
         userDAO.create(user);
+        user.setIsAdmin(false);
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
                 .put("userSession", user);

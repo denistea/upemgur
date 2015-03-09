@@ -71,5 +71,4 @@ public class SearchUsersController implements Serializable {
         this.value = value;
     }
     
-    
 }
