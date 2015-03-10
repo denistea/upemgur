@@ -26,31 +26,28 @@
                         <div class="col-sm-9 content-right">
                             <ui:repeat value="#{commentController.getCommentsByUser(usersController.getUserByUserName(param['userName']))}" var="comment">
                                 <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <c:if test="#{userSession.userName eq param['userName']}">
-                                            <h:form>
-                                                <h:commandLink type="button" class="close" action="#{commentController.removeComment(comment)}" value="&times;">
-                                                    <f:param name="userName" value="#{userName}"/>
-                                                </h:commandLink>
-                                            </h:form>
-                                        </c:if>
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <h:link outcome="image.xhtml">
-                                                    <h:graphicImage alt="#{comment.image.title}" value="/images/#{comment.image.filename}" width="100px"/>
-                                                    <f:param name="img_id" value="#{comment.image.id}"/>
-                                                </h:link>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">
-                                                <h:outputText value="#{comment.image.title}"/>, <small>le 
-                                                    <h:outputText value="#{comment.image.time}">
-                                                        <f:convertDateTime pattern="dd/MM/yyyy à hh:mm" />
-                                                    </h:outputText></small></h4>
-                                                <h:outputText value="#{comment.content}"/>
-                                            </div>
-                                        </div>
+                                  <div class="panel-body">
+                                      <c:if test="#{userSession.userName eq param['userName']}">
+                                        <h:form>
+                                            <h:commandLink type="button" class="close" action="#{commentController.removeComment(comment)}" value="&times;">
+                                                <f:param name="userName" value="#{userName}"/>
+                                            </h:commandLink>
+                                        </h:form>
+                                      </c:if>
+                                    <div class="media">
+                                      <div class="media-left">
+                                        <h:link outcome="image.xhtml">
+                                            <h:graphicImage alt="#{comment.image.title}" value="/images/#{comment.image.filename}" width="100px"/>
+                                            <f:param name="img_id" value="#{comment.image.id}"/>
+                                        </h:link>
+                                      </div>
+                                      <div class="media-body">
+                                          <h4 class="media-heading"><h:outputText value="#{comment.image.title}"/>, <small>le <h:outputText value="#{comment.image.time}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy à HH:mm" timeZone="GMT+1" /></h:outputText></small></h4>
+                                            <h:outputText value="#{comment.content}"/>
+                                      </div>
                                     </div>
+                                  </div>
                                 </div>
                             </ui:repeat>
                         </div>

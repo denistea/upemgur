@@ -91,7 +91,7 @@ public class UploadImageController {
             for(Directory dir : metadata.getDirectories()) {
                 if(dir.getName().equals("Exif IFD0") || dir.getName().equals("Exif SubIFD")) {
                     for (Tag tag : dir.getTags()) {
-                        out.append(tag.getTagName()).append(" ").append(tag.getDescription()).append("\n");
+                        out.append(tag.getTagName()).append(" : ").append(tag.getDescription()).append("\n");
                     }
                 }
             }

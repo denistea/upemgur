@@ -54,7 +54,7 @@
                             </h:link>
                               <small>, le
                               <h:outputText value="#{comment.time}">
-                                <f:convertDateTime pattern="dd/MM/yyyy à hh:mm" />
+                                <f:convertDateTime pattern="dd/MM/yyyy à HH:mm" timeZone="GMT+1" />
                               </h:outputText>
                               </small></h4>
                           <h:outputText value="#{comment.content}"/>
