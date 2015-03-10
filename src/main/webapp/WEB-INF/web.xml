@@ -7,7 +7,7 @@
     
     <context-param>
         <param-name>IMAGE_DIR</param-name>
-        <param-value>C:/var/webapp/images</param-value>
+        <param-value>C:/var/webapp/</param-value>
     </context-param>
     
     <servlet>

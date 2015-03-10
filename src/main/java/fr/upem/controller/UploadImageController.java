@@ -77,6 +77,7 @@ public class UploadImageController {
 
         //Upload the file
         Path basePath = Paths.get(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("IMAGE_DIR"));
+        basePath = basePath.resolve("images");
         image.setFilename(part.getSubmittedFileName());
         
         try (InputStream is = part.getInputStream()){
