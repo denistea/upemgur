@@ -15,48 +15,6 @@
                 <h1>Dernières images</h1>
               </div>
                 <div class="image-container">
-                  
-                  <a href="image.html">
-                      <!-- <img alt="Image 1<br/>par <a href='test2.html'>miguel</a>" src="resources/images/sample/1.jpg"/> !-->
-                      <img alt="Image 1" src="resources/images/sample/1.jpg"/>
-                  </a>
-                  <a href="image.html">
-                      <img alt="Title 1" src="resources/images/sample/2.jpg"/>
-                  </a>
-                  <a href="image.html">
-                      <img alt="Title 1" src="resources/images/sample/3.jpg"/>
-                  </a>
-                  <a href="images/sample/4.jpg">
-                      <img alt="Title 1" src="resources/images/sample/4.jpg"/>
-                  </a>
-                  <a href="images/sample/5.jpg">
-                      <img alt="Title 1" src="resources/images/sample/5.jpg"/>
-                  </a>
-                  <a href="images/sample/6.jpg">
-                      <img alt="Title 1" src="resources/images/sample/6.jpg"/>
-                  </a>
-                  <a href="images/sample/7.jpg">
-                      <img alt="Title 1" src="resources/images/sample/7.jpg"/>
-                  </a>
-                  <a href="images/sample/8.jpg">
-                      <img alt="Title 1" src="resources/images/sample/8.jpg"/>
-                  </a>
-                  <a href="images/sample/9.jpg">
-                      <img alt="Title 1" src="resources/images/sample/9.jpg"/>
-                  </a>
-                  <a href="images/sample/1.jpg">
-                      <img alt="Title 1" src="resources/images/sample/1.jpg"/>
-                  </a>
-                  <a href="images/sample/10.jpg">
-                      <img alt="Title 1" src="resources/images/sample/10.jpg"/>
-                  </a>
-                  <a href="images/sample/3.jpg">
-                      <img alt="Title 1" src="resources/images/sample/3.jpg"/>
-                  </a>
-                  <a href="images/sample/4.jpg">
-                      <img alt="Title 1" src="resources/images/sample/4.jpg"/>
-                  </a>
-                    
                   <ui:repeat value="#{imageController.getImages(20)}" var="image">
                         <a class="image" id="#{image.id}" href="image.xhtml?img_id=#{image.id}">
                             <img alt="#{image.title}" src="/upemgur/images/#{image.filename}"/>

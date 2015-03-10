@@ -106,7 +106,7 @@ public class UploadImageController {
         
 
         imageDAO.create(image);
-        return "/upemgur/user.xhtml?faces-redirect=true&includeViewParams=true&userName="+user.getUserName();
+        return "user.xhtml?faces-redirect=true&includeViewParams=true&userName="+user.getUserName();
     }
 
     public Part getPart() {
