@@ -59,12 +59,9 @@
 
               <c:if test="#{authController.signedIn}">
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                      <li><a href="#">Uploader une image</a></li>
-                    </ul>
                     <h:form>                            
                     <ul class="nav navbar-nav navbar-right">
-                      <li><button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#uploadModal">Upload image</button></li>
+                      <li><button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#uploadModal">Ajouter une image</button></li>
                       <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                               <h:outputText value="#{userSession.userName.substring(0, 1).toUpperCase()}#{userSession.userName.substring(1).toLowerCase()}"/>

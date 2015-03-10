@@ -10,7 +10,6 @@ $(document).ready(function(){
     
     $("#subscriptionForm\\:inputEmail").keyup(checkEmail);
     $("#subscriptionForm\\:inputLogin").keyup(checkLogin);
-    //$("#inputPassword").blur(checkPassword());
     $("#subscriptionForm\\:inputPassword").keyup(checkPassword);
     $("#subscriptionForm\\:confirmPassword").keyup(checkPassword);
     $("#subscriptionForm\\:subscriptionButton").click(checkInscription);
@@ -21,12 +20,10 @@ $(document).ready(function(){
 function checkEmail() {
     if(validEmail($("#subscriptionForm\\:inputEmail").val())) {
         $("#subscriptionForm\\:inputEmail").parent().removeClass("has-error");
-        //$("#badEmail").addClass("sr-only");
         return true;
     }
     else {
         $("#subscriptionForm\\:inputEmail").parent().addClass("has-error");
-        //$("#badEmail").removeClass("sr-only");
         return false;
     }
 }
@@ -36,12 +33,10 @@ function checkLogin() {
     if(($("#subscriptionForm\\:inputLogin").val().length >= 3)
             && (re.test($("#subscriptionForm\\:inputLogin").val()) )) {
         $("#subscriptionForm\\:inputLogin").parent().removeClass("has-error");
-        //$("#badLogin").addClass("sr-only");
         return true;
     }
     else {
         $("#subscriptionForm\\:inputLogin").parent().addClass("has-error");
-        //$("#badLogin").removeClass("sr-only");
         return false;
     }
 }

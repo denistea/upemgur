@@ -11,9 +11,6 @@
     <ui:composition template="commonLayout.xhtml">
         <ui:define name="content">
             <div class="container content">
-              <div class="page-header">
-                <h1>Dernières images</h1>
-              </div>
                 <div class="image-container">
                   <ui:repeat value="#{imageController.getImages(20)}" var="image">
                         <a class="image" id="#{image.id}" href="image.xhtml?img_id=#{image.id}">
