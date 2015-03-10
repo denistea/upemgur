@@ -8,10 +8,7 @@ package fr.upem.controller;
 import fr.upem.dao.ImageDAO;
 import fr.upem.entity.Image;
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
